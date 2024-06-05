@@ -1,0 +1,3 @@
+* text=auto eol=lf
+*.* linguist-detectable=false
+/rsynccheck/* linguist-detectable=true

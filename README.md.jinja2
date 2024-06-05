@@ -1,0 +1,287 @@
+<!--
+{% set project_name='rsynccheck' %}
+{% set project_name_proper='RSyncCheck' %}
+{% set last_release=shell('tomlq -r -e \'.["tool"]["rsynccheck-project-metadata"]["last_release"]\' pyproject.toml',
+                                   include_args=False) | trim %}
+{% set last_stable_release=shell('tomlq -r -e \'.["tool"]["rsynccheck-project-metadata"]["last_stable_release"]\' pyproject.toml',
+                                 include_args=False) | trim %}
+{% set tested_python_versions=shell('python -m yq -r -c \'[.jobs["build-and-test"]["strategy"]["matrix"]["python-version"][].gh] | join(", ")\' .github/workflows/build-and-test.yml',
+                                 include_args=False) | trim %}
+{% set badge_color='0A1E1E' %}
+
+-->
+
+# <div align="center">[![{{project_name_proper}}][1]][2]</div>
+
+<div align="center">
+
+<!-- Icons from https://lucide.dev/icons/users -->
+<!-- Icons from https://lucide.dev/icons/laptop-minimal -->
+
+![**Audience:** Developers][3] ![**Platform:** Linux][4]
+
+</div>
+
+<p align="center">
+  <strong>
+    <a href="https://github.com/realazthat/{{project_name}}">🏠Home</a>
+    &nbsp;&bull;&nbsp;
+    <a href="#-features">🎇Features</a>
+    &nbsp;&bull;&nbsp;
+    <a href="#-installation">🔨Installation</a>
+    &nbsp;&bull;&nbsp;
+    <a href="#-usage">🚜Usage</a>
+    &nbsp;&bull;&nbsp;
+    <a href="#-command-line-options">💻CLI</a>
+    &nbsp;&bull;&nbsp;
+    <a href="#-examples">💡Examples</a>
+  </strong>
+</p>
+<p align="center">
+  <strong>
+    <a href="#-jinja2-api">🤖Jinja2 API</a>
+    &nbsp;&bull;&nbsp;
+    <a href="#-requirements">✅Requirements</a>
+    &nbsp;&bull;&nbsp;
+    <a href="#-docker-image">🐳Docker</a>
+    &nbsp;&bull;&nbsp;
+    <a href="#-gotchas-and-limitations">🚸Gotchas</a>
+  </strong>
+</p>
+
+<div align="center">
+
+![Top language][5] [![GitHub License][6]][7] [![PyPI - Version][8]][9]
+[![Python Version][10]][9]
+
+**CLI to embed (testable) snippets from your codebase into your README**
+
+</div>
+
+---
+
+<div align="center">
+
+|                   | Status                      | Stable                    | Unstable                  |                          |
+| ----------------- | --------------------------- | ------------------------- | ------------------------- | ------------------------ |
+| **[Master][11]**  | [![Build and Test][12]][13] | [![since tagged][14]][15] |                           | [![last commit][16]][17] |
+| **[Develop][18]** | [![Build and Test][19]][13] | [![since tagged][20]][21] | [![since tagged][22]][23] | [![last commit][24]][25] |
+
+</div>
+
+<img src="./.github/demo.gif" alt="Demo" width="100%">
+
+## ❔ What
+
+Check the progress of a long running rsync operation, by hashing chunks of the
+files.
+
+## 🎇 Features
+
+- Can use any {md5sum/xxhash}-compatible CLI to hash the files.
+- 🐳🌊🖥️ Docker Image (See [README: Docker Image](#-docker-image)).
+
+## 🔨 Installation
+
+```bash
+# Install from pypi (https://pypi.org/project/{{project_name}}/)
+pip install {{project_name}}
+
+# Install from git (https://github.com/realazthat/{{project_name}})
+pip install git+https://github.com/realazthat/{{project_name}}.git@v{{last_stable_release}}
+```
+
+## 🚜 Usage
+
+<!--{{ snippet('./rsynccheck/examples/hash-audit_example.sh',
+               start='# SNIPPET_START',
+               end='\n# SNIPPET_END',
+               backtickify='bash',
+               decomentify='nl') }}-->
+
+## 💻 Command Line Options
+
+<!--{{ shell('python -m rsynccheck.cli --help',
+             rich='README.help.generated.svg',
+             rich_alt='Output of `python -m rsynccheck.cli --help`',
+             rich_bg_color='black',
+             rich_term='xterm-256color',
+             rich_cols=160,
+             decomentify='nl') }}-->
+
+## ✅ Requirements
+
+- Linux-like environment
+  - Why: Uses pexpect.spawn().
+- Python 3.8+
+  - Why: Some dev dependencies require Python 3.8+.
+
+### Tested Platforms
+
+- WSL2 Ubuntu 20.04, Python `{{rawsnippet('./.python-version') | trim}}`.
+- Ubuntu 20.04, Python `{{tested_python_versions}}`, tested in GitHub Actions
+  workflow ([build-and-test.yml](./.github/workflows/build-and-test.yml)).
+
+## 🐳 Docker Image
+
+Docker images are published to [ghcr.io/realazthat/{{project_name}}][26] at each
+tag.
+
+**NOTE: You can't use a custom hashing command with the Docker image, because it
+isn't available inside the container. xxhash is installed in the image.**
+
+```bash
+# Use the published images at ghcr.io/realazthat/{{project_name}}.
+docker run --rm -it ghcr.io/realazthat/{{project_name}}:v{{last_stable_release}} --help
+
+
+```
+
+If you want to build the image yourself, you can use the Dockerfile in the
+repository.
+
+<!--{{snippet('./rsynccheck/examples/local-docker_example.sh',
+              start='# SNIPPET_START',
+              end='\n# SNIPPET_END',
+              backtickify='bash',
+              decomentify='nl')|trim}}-->
+
+## 🤏 Versioning
+
+We use SemVer for versioning. For the versions available, see the tags on this
+repository.
+
+## 🔑 License
+
+This project is licensed under the MIT License - see the
+{{path('./LICENSE.md', link='md')}} file for details.
+
+## 🙏 Thanks
+
+- Colorful CLI help:
+  [hamdanal/rich-argparse](https://github.com/hamdanal/rich-argparse).
+- pathspec, for gitignore support:
+  [cpburnz/python-pathspec](https://github.com/cpburnz/python-pathspec).
+- humanize: [jmoiron/humanize](https://github.com/jmoiron/humanize).
+- xxhash: [Cyan4973/xxHash](https://github.com/Cyan4973/xxHash).
+- pydantic: [pydantic/pydantic](https://github.com/pydantic/pydantic).
+
+## 🤝 Related Projects
+
+Not complete, and not necessarily up to date. Make a PR
+([contributions](#-contributions)) to insert/modify.
+
+| Project                  | Stars | Last Update  | Language | Platform | Similarity X Obviousness |
+| ------------------------ | ----- | ------------ | -------- | -------- | ------------------------ |
+| [RsyncProject/rsync][27] | 2.4k  | `2024/05/28` | C        | CLI      | ⭐⭐⭐                   |
+
+## 🫡 Contributions
+
+### Development environment: Linux-like
+
+- For running `pre.sh` (Linux-like environment).
+
+  - From {{path('./.github/dependencies.yml', link='md')}}, which is used for
+    the GH Action to do a fresh install of everything:
+
+    {{shell('python -m yq --yaml-output  \'.dev\' .github/dependencies.yml',
+    include_args=False,
+    backtickify='yaml',
+    indented=4
+    )}}
+
+  - Requires `pyenv`, or an exact matching version of python as in
+    {{path('./.python-version', link='md')}} (which is currently
+    `{{ rawsnippet('./.python-version') | trim }}`).
+  - act (to run the GH Action locally):
+    - Requires nodejs.
+    - Requires Go.
+    - docker.
+  - Generate animation:
+    - docker
+  - docker (for building the docker image).
+
+### Commit Process
+
+1. (Optionally) Fork the `develop` branch.
+2. Stage your files: `git add path/to/file.py`.
+3. `bash ./scripts/pre.sh`, this will format, lint, and test the code.
+4. `git status` check if anything changed (generated
+   {{path('./README.md', link='md')}} for example), if so, `git add` the
+   changes, and go back to the previous step.
+5. `git commit -m "..."`.
+6. Make a PR to `develop` (or push to develop if you have the rights).
+
+## 🔄🚀 Release Process
+
+These instructions are for maintainers of the project.
+
+1. In the `develop` branch, run `bash {{path('./scripts/pre.sh')}}` to ensure
+   everything is in order.
+2. In the `develop` branch, bump the version in
+   {{path('./pyproject.toml', link='md')}}, following semantic versioning
+   principles. Also modify the `last_release` and `last_stable_release` in the
+   `[tool.{{project_name}}-project-metadata]` table as appropriate. Run
+   `bash ./scripts/pre.sh` to ensure everything is in order.
+3. In the `develop` branch, commit these changes with a message like
+   `"Prepare release X.Y.Z"`. (See the contributions section
+   [above](#commit-process)).
+4. Merge the `develop` branch into the `master` branch:
+   `git checkout master && git merge develop --no-ff`.
+5. `master` branch: Tag the release: Create a git tag for the release with
+   `git tag -a vX.Y.Z -m "Version X.Y.Z"`.
+6. Publish to PyPI: Publish the release to PyPI with
+   `bash ./scripts/deploy-to-pypi.sh`.
+7. Push to GitHub: Push the commit and tags to GitHub with
+   `git push && git push --tags`.
+8. The `--no-ff` option adds a commit to the master branch for the merge, so
+   refork the develop branch from the master branch:
+   `git checkout develop && git merge master`.
+9. Push the develop branch to GitHub: `git push origin develop`.
+
+[1]: ./.github/logo-exported.svg
+[2]: https://github.com/realazthat/{{project_name}}
+[3]:
+  https://img.shields.io/badge/Audience-Developers-{{badge_color}}?style=plastic&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXVzZXJzIj48cGF0aCBkPSJNMTYgMjF2LTJhNCA0IDAgMCAwLTQtNEg2YTQgNCAwIDAgMC00IDR2MiIvPjxjaXJjbGUgY3g9IjkiIGN5PSI3IiByPSI0Ii8+PHBhdGggZD0iTTIyIDIxdi0yYTQgNCAwIDAgMC0zLTMuODciLz48cGF0aCBkPSJNMTYgMy4xM2E0IDQgMCAwIDEgMCA3Ljc1Ii8+PC9zdmc+
+[4]:
+  https://img.shields.io/badge/Platform-Linux-{{badge_color}}?style=plastic&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWxhcHRvcC1taW5pbWFsIj48cmVjdCB3aWR0aD0iMTgiIGhlaWdodD0iMTIiIHg9IjMiIHk9IjQiIHJ4PSIyIiByeT0iMiIvPjxsaW5lIHgxPSIyIiB4Mj0iMjIiIHkxPSIyMCIgeTI9IjIwIi8+PC9zdmc+
+[5]:
+  https://img.shields.io/github/languages/top/realazthat/{{project_name}}.svg?cacheSeconds=28800&style=plastic&color={{badge_color}}
+[6]:
+  https://img.shields.io/github/license/realazthat/{{project_name}}?style=plastic&color={{badge_color}}
+[7]: ./LICENSE.md
+[8]:
+  https://img.shields.io/pypi/v/{{project_name}}?style=plastic&color={{badge_color}}
+[9]: https://pypi.org/project/{{project_name}}/
+[10]:
+  https://img.shields.io/pypi/pyversions/{{project_name}}?style=plastic&color={{badge_color}}
+[11]: https://github.com/realazthat/{{project_name}}/tree/master
+[12]:
+  https://img.shields.io/github/actions/workflow/status/realazthat/{{project_name}}/build-and-test.yml?branch=master&style=plastic
+[13]:
+  https://github.com/realazthat/{{project_name}}/actions/workflows/build-and-test.yml
+[14]:
+  https://img.shields.io/github/commits-since/realazthat/{{project_name}}/v{{last_stable_release}}/master?style=plastic
+[15]:
+  https://github.com/realazthat/{{project_name}}/compare/v{{last_stable_release}}...master
+[16]:
+  https://img.shields.io/github/last-commit/realazthat/{{project_name}}/master?style=plastic
+[17]: https://github.com/realazthat/rsynccheck/commits/master
+[18]: https://github.com/realazthat/{{project_name}}/tree/develop
+[19]:
+  https://img.shields.io/github/actions/workflow/status/realazthat/{{project_name}}/build-and-test.yml?branch=develop&style=plastic
+[20]:
+  https://img.shields.io/github/commits-since/realazthat/{{project_name}}/v{{last_stable_release}}/develop?style=plastic
+[21]:
+  https://github.com/realazthat/{{project_name}}/compare/v{{last_stable_release}}...develop
+[22]:
+  https://img.shields.io/github/commits-since/realazthat/{{project_name}}/v{{last_release}}/develop?style=plastic
+[23]:
+  https://github.com/realazthat/{{project_name}}/compare/v{{last_release}}...develop
+[24]:
+  https://img.shields.io/github/last-commit/realazthat/{{project_name}}/develop?style=plastic
+[25]: https://github.com/realazthat/rsynccheck/commits/develop
+[26]: https://ghcr.io/realazthat/{{project_name}}
+[27]:
+  https://github.com/RsyncProject/rsync
+  "Not easy to extract a completeness fraction"

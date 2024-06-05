@@ -1,0 +1,18 @@
+{
+  "include": ["rsynccheck"],
+  "exclude": ["**/__pycache__"],
+  "ignore": [],
+  "defineConstant": {
+    "DEBUG": true
+  },
+  "stubPath": "rsynccheck/stubs",
+  "reportMissingImports": true,
+  "reportMissingTypeStubs": false,
+  "pythonVersion": "3.8",
+  "pythonPlatform": "Linux",
+  "executionEnvironments": [
+    {
+      "root": "rsynccheck"
+    }
+  ]
+}
