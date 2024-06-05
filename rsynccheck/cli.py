@@ -141,6 +141,47 @@ def _GetHashingArgs(args: argparse.Namespace) -> HashingArgs:
                      group_size=args.group_size)
 
 
+def _HashMain(args: argparse.Namespace, console: Console):
+  hashing_args = _GetHashingArgs(args)
+  ignore_metas: Dict[str, List[str]] = {}
+  ignores = _ConstructIgnorePathSpecs(ignorefiles=list(args.ignorefile),
+                                      ignorelines=list(args.ignoreline),
+                                      ignore_metas=ignore_metas,
+                                      cwd=args.directory)
+  file_iter_method: _FileIterMethodLiteral = args.file_iter_method
+  chunk_size: int = args.chunk_size
+  show_progress: Optional[_FormatLiteral] = args.progress
+  return HashMain(dd_cmd=hashing_args.dd_cmd,
+                  hash_shell_str=hashing_args.hash_shell_str,
+                  directory=_GetPath(args.directory),
+                  file_iter_method=file_iter_method,
+                  audit_file_path=_GetPath(args.audit_file),
+                  ignores=ignores,
+                  ignore_metas=ignore_metas,
+                  chunk_size=chunk_size,
+                  group_size=hashing_args.group_size,
+                  max_workers=hashing_args.max_workers,
+                  show_progress=show_progress,
+                  console=console)
+
+
+def _AuditMain(args: argparse.Namespace, console: Console):
+  hashing_args = _GetHashingArgs(args)
+  show_progress: Optional[_FormatLiteral] = args.progress
+  output_format: _FormatLiteral = args.output_format
+  mismatch_exit: int = args.mismatch_exit
+  return AuditMain(dd_cmd=hashing_args.dd_cmd,
+                   hash_shell_str=hashing_args.hash_shell_str,
+                   directory=_GetPath(args.directory),
+                   audit_file_path=_GetPath(args.audit_file),
+                   group_size=hashing_args.group_size,
+                   max_workers=_GetMaxWorkers(args.max_workers),
+                   show_progress=show_progress,
+                   output_format=output_format,
+                   mismatch_exit=mismatch_exit,
+                   console=console)
+
+
 def main():
   console = Console(file=sys.stderr)
   try:
@@ -204,43 +245,9 @@ def main():
     args = parser.parse_args()
 
     if args.cmd == 'hash':
-      hashing_args = _GetHashingArgs(args)
-      ignore_metas: Dict[str, List[str]] = {}
-      ignores = _ConstructIgnorePathSpecs(ignorefiles=list(args.ignorefile),
-                                          ignorelines=list(args.ignoreline),
-                                          ignore_metas=ignore_metas,
-                                          cwd=args.directory)
-      file_iter_method: _FileIterMethodLiteral = args.file_iter_method
-      chunk_size: int = args.chunk_size
-      show_progress: Optional[_FormatLiteral] = args.progress
-      return HashMain(dd_cmd=hashing_args.dd_cmd,
-                      hash_shell_str=hashing_args.hash_shell_str,
-                      directory=_GetPath(args.directory),
-                      file_iter_method=file_iter_method,
-                      audit_file_path=_GetPath(args.audit_file),
-                      ignores=ignores,
-                      ignore_metas=ignore_metas,
-                      chunk_size=chunk_size,
-                      group_size=hashing_args.group_size,
-                      max_workers=hashing_args.max_workers,
-                      show_progress=show_progress,
-                      console=console)
-
+      _HashMain(args, console)
     elif args.cmd == 'audit':
-      hashing_args = _GetHashingArgs(args)
-      show_progress: Optional[_FormatLiteral] = args.progress
-      output_format: _FormatLiteral = args.output_format
-      mismatch_exit: int = args.mismatch_exit
-      return AuditMain(dd_cmd=hashing_args.dd_cmd,
-                       hash_shell_str=hashing_args.hash_shell_str,
-                       directory=_GetPath(args.directory),
-                       audit_file_path=_GetPath(args.audit_file),
-                       group_size=hashing_args.group_size,
-                       max_workers=_GetMaxWorkers(args.max_workers),
-                       show_progress=show_progress,
-                       output_format=output_format,
-                       mismatch_exit=mismatch_exit,
-                       console=console)
+      _AuditMain(args, console)
     else:
       raise argparse.ArgumentError(argument=None,
                                    message=f'Unknown command {args.cmd},'

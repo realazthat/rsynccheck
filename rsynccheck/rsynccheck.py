@@ -95,7 +95,7 @@ def _Execute(*,
              console: Optional[Console],
              expected_error_status: Sequence[int] = [0]) -> str:
   is_shell_cmd = isinstance(cmd, str)
-  cmd_str = cmd if is_shell_cmd else shlex.join(cmd)
+  cmd_str: str = cmd if isinstance(cmd, str) else shlex.join(cmd)
   try:
     if console is not None:
       console.print(f'Executing: {cmd_str}', style='bold blue')
@@ -320,10 +320,11 @@ def _Format(*, progress: _ProgressInfo, format: _FormatLiteral) -> str:
   elif format == 'none':
     return ''
   elif format == 'yaml-debug':
+    results_list: List[dict] = []
     data_dict = {
         'progress': progress.Summary().model_dump(mode='json', round_trip=True),
         'chunks': progress.chunks,
-        'results': []
+        'results': results_list
     }
     for result in progress.results:
       result_dict = {
@@ -344,7 +345,7 @@ def _Format(*, progress: _ProgressInfo, format: _FormatLiteral) -> str:
           'exception':
           None if result.exception is None else str(result.exception)
       }
-      data_dict['results'].append(result_dict)
+      results_list.append(result_dict)
     return yaml.safe_dump(data_dict, sort_keys=False)
   else:
     raise Exception(

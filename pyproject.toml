@@ -42,18 +42,29 @@ keywords = [
 # contents to repin all the dependencies (probably a good idea to do once in a
 # while).
 prod = [
+  "annotated-types==0.7.0",
+  "humanize==4.9.0",
+  "markdown-it-py==3.0.0",
+  "mdurl==0.1.2",
+  "numpy==1.24.4",
   "pathspec==0.12.1",
+  "prettytable==3.10.0",
+  "pydantic==2.7.3",
+  "pydantic-core==2.18.4",
   "pygments==2.17.2",
   "pyyaml==6.0.1",
   "rich==13.7.1",
   "rich-argparse==1.4.0",
+  "termcolor==2.4.0",
   "types-pyyaml==6.0.12.20240311",
-  "typing-extensions==4.10.0"
+  "typing-extensions==4.10.0",
+  "wcwidth==0.2.13"
 ]
 # Set of dev dependencies, all pinned, so that they are known to work. To add a
 # new dependency here, add the unpinned package name here, and then run
 # `EXTRA=dev bash scripts/pin-extra-reqs.sh`.
 dev = [
+  "annotated-types==0.7.0",
   "argcomplete==3.2.3",
   "autoflake==2.3.1",
   "beautifulsoup4==4.12.3",
@@ -61,6 +72,7 @@ dev = [
   "certifi==2024.2.2",
   "cffi==1.16.0",
   "cfgv==3.4.0",
+  "changeguard==0.3.1",
   "charset-normalizer==3.3.2",
   "colorama==0.4.6",
   "cryptography==42.0.5",
@@ -68,6 +80,7 @@ dev = [
   "distlib==0.3.8",
   "docutils==0.20.1",
   "filelock==3.13.3",
+  "humanize==4.9.0",
   "identify==2.5.35",
   "idna==3.6",
   "importlib-metadata==7.1.0",
@@ -90,6 +103,7 @@ dev = [
   "mypy-extensions==1.0.0",
   "nh3==0.2.17",
   "nodeenv==1.8.0",
+  "numpy==1.24.4",
   "pathspec==0.12.1",
   "pexpect==4.9.0",
   "pip-licenses==4.3.4",
@@ -99,6 +113,8 @@ dev = [
   "prettytable==3.10.0",
   "ptyprocess==0.7.0",
   "pycparser==2.21",
+  "pydantic==2.7.3",
+  "pydantic-core==2.18.4",
   "pyflakes==3.2.0",
   "pygments==2.17.2",
   "pyright==1.1.352",
@@ -112,6 +128,7 @@ dev = [
   "secretstorage==3.3.3",
   "snipinator==2.0.0",
   "soupsieve==2.5",
+  "termcolor==2.4.0",
   "toml-sort==0.23.1",
   "tomli==2.0.1",
   "tomlkit==0.12.4",

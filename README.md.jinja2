@@ -130,12 +130,14 @@ tag.
 **NOTE: You can't use a custom hashing command with the Docker image, because it
 isn't available inside the container. xxhash is installed in the image.**
 
-```bash
-# Use the published images at ghcr.io/realazthat/{{project_name}}.
-docker run --rm -it ghcr.io/realazthat/{{project_name}}:v{{last_stable_release}} --help
+Docker images are published to [ghcr.io/realazthat/{{project_name}}][50] at each
+tag.
 
-
-```
+<!--{{snippet('./rsynccheck/examples/remote-docker_example-noautorun.sh',
+              start='# SNIPPET_START',
+              end='\n# SNIPPET_END',
+              backtickify='bash',
+              decomentify='nl')|trim}}-->
 
 If you want to build the image yourself, you can use the Dockerfile in the
 repository.

@@ -145,12 +145,38 @@ tag.
 **NOTE: You can't use a custom hashing command with the Docker image, because it
 isn't available inside the container. xxhash is installed in the image.**
 
+Docker images are published to [ghcr.io/realazthat/rsynccheck][50] at each
+tag.
+
+<!---->
 ```bash
+
 # Use the published images at ghcr.io/realazthat/rsynccheck.
-docker run --rm -it ghcr.io/realazthat/rsynccheck:v0.0.1 --help
+docker run --rm --tty \
+  -v "${PWD}:/data" \
+  ghcr.io/realazthat/rsynccheck:v0.0.1 --help
 
+# /data in the docker image is the working directory, so paths are simpler.
+docker run --rm --tty \
+  -v "${PWD}:/data" \
+  ghcr.io/realazthat/rsynccheck:v0.0.1 \
+  hash \
+  --ignorefile ".gitignore" \
+  --ignoreline .trunk --ignoreline .git \
+  --audit-file ".deleteme/check-changes-audit.yaml" \
+  --chunk-size "${CHUNK_SIZE}" \
+  --directory "${SRC_DIRECTORY}"
 
+docker run --rm --tty \
+  -v "${PWD}:/data" \
+  ghcr.io/realazthat/rsynccheck:v0.0.1 \
+  audit \
+  --audit-file ".deleteme/check-changes-audit.yaml" \
+  --directory "${DST_DIRECTORY}" \
+  --output-format table \
+  --mismatch-exit 0
 ```
+<!---->
 
 If you want to build the image yourself, you can use the Dockerfile in the
 repository.
