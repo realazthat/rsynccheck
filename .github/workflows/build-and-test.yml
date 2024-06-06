@@ -55,6 +55,10 @@ jobs:
         echo "${{ matrix.python-version.file }}"
         echo "${{ matrix.python-version.file }}" > .python-version
         cat .python-version
+    - name: Some extra python setup
+      run: |
+        python -m ensurepip --upgrade
+        pip install --upgrade setuptools wheel pip
     - name: Run everything
       run: |
         bash scripts/pre.sh
