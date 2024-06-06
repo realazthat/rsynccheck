@@ -14,7 +14,6 @@ from pathlib import Path
 from typing import (Any, Dict, Generator, List, NamedTuple, Optional, Sequence,
                     Set, TextIO, Tuple, Union)
 
-import numpy as np
 import pathspec
 import yaml
 from prettytable import PrettyTable
@@ -315,7 +314,13 @@ def _Format(*, progress: _ProgressInfo, format: _FormatLiteral) -> str:
   elif format == 'fraction':
     return f'{progress.Summary().success}/{progress.chunks}'
   elif format == 'percent':
-    complete = np.divide(progress.Summary().success * 100., progress.chunks)
+    success = progress.Summary().success
+    try:
+      complete: float = (success * 100.) / progress.chunks
+    except ZeroDivisionError:
+      complete = 0
+    except (OverflowError):
+      complete = 0
     return f'{complete:.2f}%'
   elif format == 'none':
     return ''
