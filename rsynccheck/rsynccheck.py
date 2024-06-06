@@ -1,3 +1,10 @@
+# -*- coding: utf-8 -*-
+# SPDX-License-Identifier: MIT
+#
+# The RSyncCheck project requires contributions made to this file be licensed
+# under the MIT license or a compatible open source license. See LICENSE.md for
+# the license text.
+
 import enum
 import json
 import shlex
@@ -304,7 +311,7 @@ def _Format(*, progress: _ProgressInfo, format: _FormatLiteral) -> str:
                                                     round_trip=True),
                       indent=None)
   elif format == 'table':
-    table = PrettyTable(["Name", "Value"])
+    table = PrettyTable(['Name', 'Value'])
 
     for name, value in progress.Summary().model_dump(mode='json',
                                                      round_trip=True).items():
@@ -408,7 +415,7 @@ def _HashChunk(*, dd_cmd: str, hash_shell_str: str, directory: Path, path: Path,
         f'\n  file size: {size}'
         f'\n  file chunks: {file_chunks}')
   dd_invoc = [
-      dd_cmd, f'if={path}', f'bs={chunk_size}', f'skip={chunk_idx}', f'count=1'
+      dd_cmd, f'if={path}', f'bs={chunk_size}', f'skip={chunk_idx}', 'count=1'
   ]
   dd_invoc_str = shlex.join(dd_invoc)
   shell: str = f'({dd_invoc_str}) | {hash_shell_str}'

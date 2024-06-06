@@ -96,32 +96,50 @@ pip install git+https://github.com/realazthat/rsynccheck.git@v0.0.1
 
 ## 🚜 Usage
 
+Example:
+
 <!---->
 ```bash
 
-python -m rsynccheck.cli --help
-
+# Generate the audit.yaml file.
 python -m rsynccheck.cli \
   hash \
   --ignorefile ".gitignore" \
   --ignoreline .trunk --ignoreline .git \
   --audit-file ".deleteme/check-changes-audit.yaml" \
+  --progress none \
   --chunk-size "${CHUNK_SIZE}" \
   --directory "${SRC_DIRECTORY}"
 
+# Check the audit.yaml file on the other machine.
 python -m rsynccheck.cli \
   audit \
   --audit-file ".deleteme/check-changes-audit.yaml" \
-  --directory "${DST_DIRECTORY}" \
+  --progress none \
   --output-format table \
-  --mismatch-exit 0
+  --mismatch-exit 0 \
+  --directory "${DST_DIRECTORY}"
 ```
 <!---->
+
+Screenshot in terminal:
+
+<!---->
+<img alt="Output of `./snipinator/examples/example_example.sh`" src="https://raw.githubusercontent.com/realazthat/rsynccheck/v0.0.1/README.example.generated.svg"/>
+<!-- -->
 
 ## 💻 Command Line Options
 
 <!---->
 <img alt="Output of `python -m rsynccheck.cli --help`" src="https://raw.githubusercontent.com/realazthat/rsynccheck/v0.0.1/README.help.generated.svg"/>
+<!-- -->
+
+<!---->
+<img alt="Output of `python -m rsynccheck.cli hash --help`" src="https://raw.githubusercontent.com/realazthat/rsynccheck/v0.0.1/README.hash.help.generated.svg"/>
+<!-- -->
+
+<!---->
+<img alt="Output of `python -m rsynccheck.cli audit --help`" src="https://raw.githubusercontent.com/realazthat/rsynccheck/v0.0.1/README.audit.help.generated.svg"/>
 <!-- -->
 
 ## ✅ Requirements
@@ -145,17 +163,11 @@ tag.
 **NOTE: You can't use a custom hashing command with the Docker image, because it
 isn't available inside the container. xxhash is installed in the image.**
 
-Docker images are published to [ghcr.io/realazthat/rsynccheck][50] at each
-tag.
-
 <!---->
 ```bash
 
 # Use the published images at ghcr.io/realazthat/rsynccheck.
-docker run --rm --tty \
-  -v "${PWD}:/data" \
-  ghcr.io/realazthat/rsynccheck:v0.0.1 --help
-
+# Generate the audit.yaml file.
 # /data in the docker image is the working directory, so paths are simpler.
 docker run --rm --tty \
   -v "${PWD}:/data" \
@@ -164,17 +176,20 @@ docker run --rm --tty \
   --ignorefile ".gitignore" \
   --ignoreline .trunk --ignoreline .git \
   --audit-file ".deleteme/check-changes-audit.yaml" \
+  --progress none \
   --chunk-size "${CHUNK_SIZE}" \
   --directory "${SRC_DIRECTORY}"
 
+# Check the audit.yaml file on the other machine.
 docker run --rm --tty \
   -v "${PWD}:/data" \
   ghcr.io/realazthat/rsynccheck:v0.0.1 \
   audit \
   --audit-file ".deleteme/check-changes-audit.yaml" \
-  --directory "${DST_DIRECTORY}" \
+  --progress none \
   --output-format table \
-  --mismatch-exit 0
+  --mismatch-exit 0 \
+  --directory "${DST_DIRECTORY}"
 ```
 <!---->
 
@@ -186,10 +201,7 @@ repository.
 
 docker build -t my-rsynccheck-image .
 
-docker run --rm --tty \
-  -v "${PWD}:/data" \
-  my-rsynccheck-image --help
-
+# Generate the audit.yaml file.
 # /data in the docker image is the working directory, so paths are simpler.
 docker run --rm --tty \
   -v "${PWD}:/data" \
@@ -198,17 +210,20 @@ docker run --rm --tty \
   --ignorefile ".gitignore" \
   --ignoreline .trunk --ignoreline .git \
   --audit-file ".deleteme/check-changes-audit.yaml" \
+  --progress none \
   --chunk-size "${CHUNK_SIZE}" \
   --directory "${SRC_DIRECTORY}"
 
+# Check the audit.yaml file on the other machine.
 docker run --rm --tty \
   -v "${PWD}:/data" \
   my-rsynccheck-image \
   audit \
   --audit-file ".deleteme/check-changes-audit.yaml" \
-  --directory "${DST_DIRECTORY}" \
+  --progress none \
   --output-format table \
-  --mismatch-exit 0
+  --mismatch-exit 0 \
+  --directory "${DST_DIRECTORY}"
 ```
 <!---->
 

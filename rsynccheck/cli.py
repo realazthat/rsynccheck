@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+# SPDX-License-Identifier: MIT
+#
+# The RSyncCheck project requires contributions made to this file be licensed
+# under the MIT license or a compatible open source license. See LICENSE.md for
+# the license text.
 """Check the completeness of an rsync operation."""
 import argparse
 import json
@@ -17,6 +23,7 @@ from .rsynccheck import (_VALID_FILE_ITER_METHODS, _VALID_FORMATS, AuditMain,
                          HashMain, _ConstructIgnorePathSpecs,
                          _FileIterMethodLiteral, _FormatLiteral)
 
+_DEFAULT_FILE_ITER_METHOD: _FileIterMethodLiteral = 'iterdir'
 _DEFAULT_HASH_SHELL_STR = 'xxhsum -H0'
 _DEFAULT_CHUNK_SIZE = 4096 * 1024
 _DEFAULT_GROUP_SIZE = 10
@@ -64,16 +71,13 @@ def _AddDirectoryArgs(parser: argparse.ArgumentParser, *, action: str):
 
 def _AddHashingArgs(parser: argparse.ArgumentParser):
   parser.add_argument(
-      '--hash-shell-str',
-      type=str,
-      default=_DEFAULT_HASH_SHELL_STR,
+      '--progress',
+      choices=_VALID_FORMATS,
+      default='yaml',
       help=
-      f'Shell string/command to hash files with. Default is {json.dumps(_DEFAULT_HASH_SHELL_STR)}'
+      f'Progress format to use. Default is "yaml". Choices are {_VALID_FORMATS}.'
   )
-  parser.add_argument('--dd-cmd',
-                      type=str,
-                      default='dd',
-                      help='Command to copy files with. Default is "dd".')
+
   parser.add_argument(
       '--group-size',
       type=int,
@@ -89,12 +93,16 @@ def _AddHashingArgs(parser: argparse.ArgumentParser):
       f'Maximum number of workers to use for hashing. To use the number of CPUs, set to 0. Default is {_DEFAULT_MAX_WORKERS}.'
   )
   parser.add_argument(
-      '--progress',
-      choices=_VALID_FORMATS,
-      default='yaml',
+      '--hash-shell-str',
+      type=str,
+      default=_DEFAULT_HASH_SHELL_STR,
       help=
-      f'Progress format to use. Default is "yaml". Choices are {_VALID_FORMATS}.'
+      f'Shell string/command to hash files with. Default is {json.dumps(_DEFAULT_HASH_SHELL_STR)}'
   )
+  parser.add_argument('--dd-cmd',
+                      type=str,
+                      default='dd',
+                      help='Command to copy files with. Default is "dd".')
 
 
 class _CustomRichHelpFormatter(RichHelpFormatter):
@@ -192,17 +200,18 @@ def main():
     parser.add_argument('--version', action='version', version=_build_version)
 
     cmd = parser.add_subparsers(required=True, dest='cmd')
+    ############################################################################
     hash_cmd_parser = cmd.add_parser('hash', help='Hash files in a directory.')
+    _AddDirectoryArgs(hash_cmd_parser, action='hash')
     hash_cmd_parser.add_argument(
         '--file-iter-method',
         choices=_VALID_FILE_ITER_METHODS,
-        default='iterdir',
+        default=_DEFAULT_FILE_ITER_METHOD,
         help=
-        'Method to use to list files. git ls-files to enumerate staged files. iterdir, iterates the file system. auto uses git if the directory is a git repo, otherwise iterdir.'
-    )
-    _AddIgnoreArgs(hash_cmd_parser)
-    _AddDirectoryArgs(hash_cmd_parser, action='hash')
-    _AddHashingArgs(hash_cmd_parser)
+        'Method to use to list files. git ls-files to enumerate staged files.'
+        ' iterdir, iterates the file system.'
+        ' auto uses git if the directory is a git repo, otherwise iterdir.'
+        f' Default is {_DEFAULT_FILE_ITER_METHOD}.')
     hash_cmd_parser.add_argument(
         '--chunk-size',
         type=int,
@@ -215,6 +224,9 @@ def main():
         type=Path,
         required=True,
         help='File to output the hashes to, used for auditing.')
+    _AddIgnoreArgs(hash_cmd_parser)
+    _AddHashingArgs(hash_cmd_parser)
+    ############################################################################
     audit_cmd_parser = cmd.add_parser(
         'audit',
         help=
@@ -226,7 +238,6 @@ def main():
         type=Path,
         required=True,
         help='File to read hashes from, used for auditing.')
-    _AddHashingArgs(audit_cmd_parser)
     audit_cmd_parser.add_argument(
         '--output-format',
         choices=_VALID_FORMATS,
@@ -241,6 +252,8 @@ def main():
         help=
         f'Exit code to use if a mismatch is found. Default is {_DEFAULT_MISMATCH_EXIT}.'
     )
+    _AddHashingArgs(audit_cmd_parser)
+    ############################################################################
 
     args = parser.parse_args()
 
