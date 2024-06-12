@@ -6,13 +6,18 @@
 # the license text.
 """Check the completeness of an rsync operation."""
 import argparse
+import asyncio
 import json
+import logging
+import pathlib
 import sys
 import warnings
+from contextlib import asynccontextmanager
 from pathlib import Path
 from shutil import get_terminal_size
-from typing import List, NamedTuple, Optional
+from typing import AsyncIterator, List, NamedTuple, Optional
 
+import anyio
 import humanize
 from rich.console import Console
 from rich_argparse import RichHelpFormatter
@@ -20,8 +25,11 @@ from typing_extensions import Dict
 
 from . import _build_version
 from .rsynccheck import (_VALID_FILE_ITER_METHODS, _VALID_FORMATS, AuditMain,
-                         HashMain, _ConstructIgnorePathSpecs,
+                         HashMain, _ConstructIgnorePathSpecsSync,
                          _FileIterMethodLiteral, _FormatLiteral)
+from .utilities.error_utils import _ErrorContext
+
+logger = logging.getLogger(__name__)
 
 _DEFAULT_FILE_ITER_METHOD: _FileIterMethodLiteral = 'iterdir'
 _DEFAULT_HASH_SHELL_STR = 'xxhsum -H0'
@@ -52,7 +60,8 @@ def _AddIgnoreArgs(parser: argparse.ArgumentParser):
                       help='File containing additional ignore patterns.'
                       ' Follows gitignore syntax.'
                       ' See <https://github.com/cpburnz/python-pathspec>.'
-                      ' Can be used more than once.')
+                      ' Can be used more than once.'
+                      ' Path is interpreted as relative to the user\'s cwd.')
   parser.add_argument('--ignoreline',
                       type=str,
                       action='append',
@@ -60,11 +69,18 @@ def _AddIgnoreArgs(parser: argparse.ArgumentParser):
                       help='Ignore pattern. Follows gitignore syntax.'
                       ' See <https://github.com/cpburnz/python-pathspec>.'
                       ' Can be used more than once.')
+  parser.add_argument(
+      '--special-ignorefile',
+      type=str,
+      default='.rsynccheckignore',
+      help=
+      'Searches for this file in the root of the directory and treats it like an --ignorefile.'
+  )
 
 
 def _AddDirectoryArgs(parser: argparse.ArgumentParser, *, action: str):
   parser.add_argument('--directory',
-                      type=Path,
+                      type=pathlib.Path,
                       required=True,
                       help=f'Directory to {action}.')
 
@@ -130,8 +146,36 @@ def _GetMaxWorkers(max_workers: int) -> int:
   return max_workers
 
 
-def _GetPath(path: Path) -> Path:
-  return path.expanduser().resolve()
+async def _GetPath(path: anyio.Path) -> anyio.Path:
+  expanded: anyio.Path = await path.expanduser()
+  resolved: anyio.Path = await expanded.resolve()
+  return resolved
+
+
+@asynccontextmanager
+async def _OpenFileOrStdout(
+    path_str: str) -> AsyncIterator[anyio.AsyncFile[str]]:
+  if path_str == '-':
+    async with anyio.wrap_file(sys.stdout) as wrapped_stdout:
+      yield wrapped_stdout
+  else:
+    path: anyio.Path = await _GetPath(anyio.Path(path_str))
+    if not await path.parent.exists():
+      await path.parent.mkdir(parents=True, exist_ok=True)
+    async with await anyio.open_file(path, 'w') as file:
+      yield file
+
+
+@asynccontextmanager
+async def _OpenFileOrStdin(
+    path_str: str) -> AsyncIterator[anyio.AsyncFile[str]]:
+  if path_str == '-':
+    async with anyio.wrap_file(sys.stdin) as wrapped_stdin:
+      yield wrapped_stdin
+  else:
+    path: anyio.Path = await _GetPath(anyio.Path(path_str))
+    async with await anyio.open_file(path, 'r') as file:
+      yield file
 
 
 class HashingArgs(NamedTuple):
@@ -149,48 +193,65 @@ def _GetHashingArgs(args: argparse.Namespace) -> HashingArgs:
                      group_size=args.group_size)
 
 
-def _HashMain(args: argparse.Namespace, console: Console):
+async def _HashMainFromArgs(args: argparse.Namespace, console: Console):
   hashing_args = _GetHashingArgs(args)
   ignore_metas: Dict[str, List[str]] = {}
-  ignores = _ConstructIgnorePathSpecs(ignorefiles=list(args.ignorefile),
-                                      ignorelines=list(args.ignoreline),
-                                      ignore_metas=ignore_metas,
-                                      cwd=args.directory)
+  ignores = _ConstructIgnorePathSpecsSync(
+      special_ignorefile_name=args.special_ignorefile,
+      ignorefiles=list(args.ignorefile),
+      ignorelines=list(args.ignoreline),
+      ignore_metas=ignore_metas,
+      cwd=args.directory)
   file_iter_method: _FileIterMethodLiteral = args.file_iter_method
   chunk_size: int = args.chunk_size
   show_progress: Optional[_FormatLiteral] = args.progress
-  return HashMain(dd_cmd=hashing_args.dd_cmd,
-                  hash_shell_str=hashing_args.hash_shell_str,
-                  directory=_GetPath(args.directory),
-                  file_iter_method=file_iter_method,
-                  audit_file_path=_GetPath(args.audit_file),
-                  ignores=ignores,
-                  ignore_metas=ignore_metas,
-                  chunk_size=chunk_size,
-                  group_size=hashing_args.group_size,
-                  max_workers=hashing_args.max_workers,
-                  show_progress=show_progress,
-                  console=console)
+  logs_artifacts_path = await _GetPath(anyio.Path(args.logs_artifacts_path))
+
+  err_ctx = await _ErrorContext.Create(logs_artifacts_path=logs_artifacts_path, key='hash')
+
+  async with err_ctx, \
+        _OpenFileOrStdout(str(args.audit_file)) as audit_file_ostream:
+    return await HashMain(dd_cmd=hashing_args.dd_cmd,
+                          hash_shell_str=hashing_args.hash_shell_str,
+                          directory=await _GetPath(anyio.Path(args.directory)),
+                          file_iter_method=file_iter_method,
+                          audit_file_ostream=audit_file_ostream,
+                          ignores=ignores,
+                          ignore_metas=ignore_metas,
+                          chunk_size=chunk_size,
+                          group_size=hashing_args.group_size,
+                          max_workers=hashing_args.max_workers,
+                          show_progress=show_progress,
+                          console=console,
+                          err_ctx=err_ctx.StepInto())
 
 
-def _AuditMain(args: argparse.Namespace, console: Console):
+async def _AuditMainFromArgs(args: argparse.Namespace, console: Console):
   hashing_args = _GetHashingArgs(args)
   show_progress: Optional[_FormatLiteral] = args.progress
   output_format: _FormatLiteral = args.output_format
   mismatch_exit: int = args.mismatch_exit
-  return AuditMain(dd_cmd=hashing_args.dd_cmd,
-                   hash_shell_str=hashing_args.hash_shell_str,
-                   directory=_GetPath(args.directory),
-                   audit_file_path=_GetPath(args.audit_file),
-                   group_size=hashing_args.group_size,
-                   max_workers=_GetMaxWorkers(args.max_workers),
-                   show_progress=show_progress,
-                   output_format=output_format,
-                   mismatch_exit=mismatch_exit,
-                   console=console)
+  logs_artifacts_path = await _GetPath(anyio.Path(args.logs_artifacts_path))
+
+  err_ctx = await _ErrorContext.Create(logs_artifacts_path=logs_artifacts_path, key='audit')
+  async with err_ctx, _OpenFileOrStdin(args.audit_file) as audit_file_istream:
+
+    audit_yaml_str: str = await audit_file_istream.read()
+
+    return await AuditMain(dd_cmd=hashing_args.dd_cmd,
+                           hash_shell_str=hashing_args.hash_shell_str,
+                           directory=await _GetPath(anyio.Path(args.directory)),
+                           audit_yaml_str=audit_yaml_str,
+                           group_size=hashing_args.group_size,
+                           max_workers=_GetMaxWorkers(args.max_workers),
+                           show_progress=show_progress,
+                           output_format=output_format,
+                           mismatch_exit=mismatch_exit,
+                           console=console,
+                           err_ctx=err_ctx.StepInto())
 
 
-def main():
+async def amain():
   console = Console(file=sys.stderr)
   try:
     parser = argparse.ArgumentParser(prog=_GetProgramName(),
@@ -198,6 +259,10 @@ def main():
                                      formatter_class=_CustomRichHelpFormatter)
 
     parser.add_argument('--version', action='version', version=_build_version)
+    parser.add_argument('--logs-artifacts-path',
+                        type=pathlib.Path,
+                        default=Path('.logs/artifacts'),
+                        help='Path to store logs and artifacts.')
 
     cmd = parser.add_subparsers(required=True, dest='cmd')
     ############################################################################
@@ -221,9 +286,10 @@ def main():
     )
     hash_cmd_parser.add_argument(
         '--audit-file',
-        type=Path,
+        type=str,
         required=True,
-        help='File to output the hashes to, used for auditing.')
+        help=
+        'File to output the hashes to, used for auditing. Use "-" for stdout.')
     _AddIgnoreArgs(hash_cmd_parser)
     _AddHashingArgs(hash_cmd_parser)
     ############################################################################
@@ -235,9 +301,9 @@ def main():
     _AddDirectoryArgs(audit_cmd_parser, action='audit')
     audit_cmd_parser.add_argument(
         '--audit-file',
-        type=Path,
+        type=str,
         required=True,
-        help='File to read hashes from, used for auditing.')
+        help='File to read hashes from, used for auditing. Use "-" for stdin.')
     audit_cmd_parser.add_argument(
         '--output-format',
         choices=_VALID_FORMATS,
@@ -258,16 +324,21 @@ def main():
     args = parser.parse_args()
 
     if args.cmd == 'hash':
-      _HashMain(args, console)
+      await _HashMainFromArgs(args, console)
     elif args.cmd == 'audit':
-      _AuditMain(args, console)
+      await _AuditMainFromArgs(args, console)
     else:
       raise argparse.ArgumentError(argument=None,
                                    message=f'Unknown command {args.cmd},'
                                    ' expected {hash, audit}.')
   except Exception:
+    logger.exception('Unhandled exception.')
     console.print_exception()
     sys.exit(1)
+
+
+def main():
+  asyncio.run(amain())
 
 
 if __name__ == '__main__':

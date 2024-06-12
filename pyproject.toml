@@ -19,14 +19,17 @@ classifiers = [
   'Programming Language :: Python :: 3.12'
 ]
 dependencies = [
+  "anyio >=4.3.0,<5",
   "humanize >=4,<5",
   "pathspec >=0.12,<1",
   "prettytable >=3,<4",
   "pydantic >=2,<3",
   "pydantic_core >=2,<3",
+  "python-slugify >=8,<9",
   "pyyaml >=6,<7",
   "rich >=13,<14",
   "rich-argparse >=1,<2",
+  "ruamel.yaml >=0.18,<0.19",
   "termcolor >=2,<3",
   "types-pyyaml >=6,<7",
   "typing-extensions >=4,<5"
@@ -42,7 +45,10 @@ keywords = [
 # while).
 prod = [
   "annotated-types==0.7.0",
+  "anyio==4.4.0",
+  "exceptiongroup==1.2.1",
   "humanize==4.9.0",
+  "idna==3.7",
   "markdown-it-py==3.0.0",
   "mdurl==0.1.2",
   "pathspec==0.12.1",
@@ -50,10 +56,15 @@ prod = [
   "pydantic==2.7.3",
   "pydantic-core==2.18.4",
   "pygments==2.17.2",
+  "python-slugify==8.0.4",
   "pyyaml==6.0.1",
   "rich==13.7.1",
   "rich-argparse==1.4.0",
+  "ruamel-yaml==0.18.6",
+  "ruamel-yaml-clib==0.2.8",
+  "sniffio==1.3.1",
   "termcolor==2.4.0",
+  "text-unidecode==1.3",
   "types-pyyaml==6.0.12.20240311",
   "typing-extensions==4.10.0",
   "wcwidth==0.2.13"
@@ -63,6 +74,7 @@ prod = [
 # `EXTRA=dev bash scripts/pin-extra-reqs.sh`.
 dev = [
   "annotated-types==0.7.0",
+  "anyio==4.4.0",
   "argcomplete==3.2.3",
   "autoflake==2.3.1",
   "beautifulsoup4==4.12.3",
@@ -77,6 +89,7 @@ dev = [
   "defusedxml==0.7.1",
   "distlib==0.3.8",
   "docutils==0.20.1",
+  "exceptiongroup==1.2.1",
   "filelock==3.13.3",
   "humanize==4.9.0",
   "identify==2.5.35",
@@ -115,6 +128,7 @@ dev = [
   "pyflakes==3.2.0",
   "pygments==2.17.2",
   "pyright==1.1.352",
+  "python-slugify==8.0.4",
   "pyyaml==6.0.1",
   "readme-renderer==43.0",
   "requests==2.31.0",
@@ -122,10 +136,14 @@ dev = [
   "rfc3986==2.0.0",
   "rich==13.7.1",
   "rich-argparse==1.4.0",
+  "ruamel-yaml==0.18.6",
+  "ruamel-yaml-clib==0.2.8",
   "secretstorage==3.3.3",
+  "sniffio==1.3.1",
   "snipinator==2.1.0",
   "soupsieve==2.5",
   "termcolor==2.4.0",
+  "text-unidecode==1.3",
   "toml-sort==0.23.1",
   "tomli==2.0.1",
   "tomlkit==0.12.4",
@@ -157,6 +175,6 @@ last_release = "0.0.1"
 last_stable_release = "0.0.1"
 
 [tool.setuptools]
-packages = ["rsynccheck"]
+packages = ["rsynccheck", "rsynccheck.utilities"]
 
 [tool.tomlsort]

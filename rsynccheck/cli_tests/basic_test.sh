@@ -8,23 +8,35 @@ set +v
 
 
 
+TMP_DIR=$(mktemp -d)
+ORIGINAL_PWD="${PWD}"
 
-YELLOW='\033[1;33m'
-NC='\033[0m' # No Color
+function delete_tmp_dir {
+  cd "${ORIGINAL_PWD}"
+  rm -rf "${TMP_DIR}"
+}
+trap delete_tmp_dir EXIT
 
-# Don't run this in act/GH actions because act doesn't play with with nested
-# docker; the paths mess up.
-if [[ -n "${GITHUB_ACTIONS:-}" ]]; then
-  echo -e "${YELLOW}This script is not meant to be run in GitHub Actions.${NC}"
-  exit 0
-fi
-mkdir -p ".deleteme"
+
+################################################################################
+mkdir -p "${TMP_DIR}/original"
+mkdir -p "${TMP_DIR}/original/subfolder"
+mkdir -p "${TMP_DIR}/copy"
+################################################################################
+
+
+dd if=/dev/urandom of="${TMP_DIR}/original/file1" bs=1 count=1
+dd if=/dev/urandom of="${TMP_DIR}/original/file2" bs=5 count=1
+dd if=/dev/urandom of="${TMP_DIR}/original/file3" bs=1024 count=1
+dd if=/dev/urandom of="${TMP_DIR}/original/file4" bs=1024 count=1
+dd if=/dev/urandom of="${TMP_DIR}/original/subfolder/file5" bs=1024 count=1
+dd if=/dev/urandom of="${TMP_DIR}/original/subfolder/file6" bs=1024 count=1
 
 # Use a small chunk size because our files are small, and we want to demonstrate
 # that the completion percentage is approximately correct.
 CHUNK_SIZE=10
-SRC_DIRECTORY=./rsynccheck/examples
-DST_DIRECTORY=.deleteme/destination
+SRC_DIRECTORY="${TMP_DIR}/original"
+DST_DIRECTORY="${TMP_DIR}/copy"
 
 rm -Rf "${DST_DIRECTORY}"
 mkdir -p "${DST_DIRECTORY}"
@@ -41,45 +53,39 @@ find "${SRC_DIRECTORY}" -type f -name "*" -print0 | while IFS= read -r -d '' PWD
 done
 set -x -v
 
-# INCORRECT_SNIPPET_START
-# Use the published images at ghcr.io/realazthat/rsynccheck.
 # Generate the audit.yaml file.
-# /data in the docker image is the working directory, so paths are simpler.
-docker run --rm --tty \
-  -v "${PWD}:/data" \
-  ghcr.io/realazthat/rsynccheck:v0.0.1 \
+python -m rsynccheck.cli \
   hash \
   --ignorefile ".gitignore" \
   --ignoreline .trunk --ignoreline .git \
-  --audit-file ".deleteme/check-changes-audit.yaml" \
+  --audit-file "${TMP_DIR}/check-changes-audit.yaml" \
   --progress none \
   --chunk-size "${CHUNK_SIZE}" \
   --directory "${SRC_DIRECTORY}"
 
-# Check the audit.yaml file on the other machine.
-docker run --rm --tty \
-  -v "${PWD}:/data" \
-  ghcr.io/realazthat/rsynccheck:v0.0.1 \
+EXIT_CODE=0
+python -m rsynccheck.cli \
   audit \
-  --audit-file ".deleteme/check-changes-audit.yaml" \
+  --audit-file "${TMP_DIR}/check-changes-audit.yaml" \
   --progress none \
   --output-format table \
-  --mismatch-exit 0 \
-  --directory "${DST_DIRECTORY}"
-# INCORRECT_SNIPPET_END
+  --mismatch-exit 10 \
+  --directory "${DST_DIRECTORY}" \
+  || EXIT_CODE=$?
+
+if [[ "${EXIT_CODE}" -ne 10 ]]; then
+  echo "Expected exit code 10, got ${EXIT_CODE}"
+  exit 1
+fi
 
 # Now copy all the files correctly.
 rm -Rf "${DST_DIRECTORY}"
 rsync -a "${SRC_DIRECTORY}/" "${DST_DIRECTORY}"
 
-# CORRECT_SNIPPET_START
-docker run --rm --tty \
-  -v "${PWD}:/data" \
-  ghcr.io/realazthat/rsynccheck:v0.0.1 \
+python -m rsynccheck.cli \
   audit \
-  --audit-file ".deleteme/check-changes-audit.yaml" \
+  --audit-file "${TMP_DIR}/check-changes-audit.yaml" \
   --progress none \
   --output-format table \
   --mismatch-exit 1 \
   --directory "${DST_DIRECTORY}"
-# CORRECT_SNIPPET_END

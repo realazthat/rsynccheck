@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<svg xmlns="http://www.w3.org/2000/svg" class="rich-terminal" viewBox="0 0 1970 830.8">
+<svg xmlns="http://www.w3.org/2000/svg" class="rich-terminal" viewBox="0 0 1970 879.5999999999999">
 <!-- Generated with Rich textualize.io -->
 <rect width="100%" height="100%" fill="black"/>
 <style>
@@ -19,213 +19,225 @@ url(&quot;https://cdnjs.cloudflare.com/ajax/libs/firacode/6.2.0/woff/FiraCode-Bo
 font-style: bold;
 font-weight: 700;
 }
-.terminal-1238017509-matrix {
+.terminal-3209169651-matrix {
 font-family: Fira Code, monospace;
 font-size: 20px;
 line-height: 24.4px;
 font-variant-east-asian: full-width;
 }
-.terminal-1238017509-title {
+.terminal-3209169651-title {
 font-size: 18px;
 font-weight: bold;
 font-family: arial;
 }
-.terminal-1238017509-r1 { fill: #d9d9d9 }
+.terminal-3209169651-r1 { fill: #d9d9d9 }
 </style>
 <defs>
-<clipPath id="terminal-1238017509-clip-terminal">
-<rect x="0" y="0" width="1951.0" height="779.8"/>
+<clipPath id="terminal-3209169651-clip-terminal">
+<rect x="0" y="0" width="1951.0" height="828.5999999999999"/>
 </clipPath>
-<clipPath id="terminal-1238017509-line-0">
+<clipPath id="terminal-3209169651-line-0">
 <rect x="0" y="1.5" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-1238017509-line-1">
+<clipPath id="terminal-3209169651-line-1">
 <rect x="0" y="25.9" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-1238017509-line-2">
+<clipPath id="terminal-3209169651-line-2">
 <rect x="0" y="50.3" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-1238017509-line-3">
+<clipPath id="terminal-3209169651-line-3">
 <rect x="0" y="74.7" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-1238017509-line-4">
+<clipPath id="terminal-3209169651-line-4">
 <rect x="0" y="99.1" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-1238017509-line-5">
+<clipPath id="terminal-3209169651-line-5">
 <rect x="0" y="123.5" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-1238017509-line-6">
+<clipPath id="terminal-3209169651-line-6">
 <rect x="0" y="147.9" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-1238017509-line-7">
+<clipPath id="terminal-3209169651-line-7">
 <rect x="0" y="172.3" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-1238017509-line-8">
+<clipPath id="terminal-3209169651-line-8">
 <rect x="0" y="196.7" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-1238017509-line-9">
+<clipPath id="terminal-3209169651-line-9">
 <rect x="0" y="221.1" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-1238017509-line-10">
+<clipPath id="terminal-3209169651-line-10">
 <rect x="0" y="245.5" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-1238017509-line-11">
+<clipPath id="terminal-3209169651-line-11">
 <rect x="0" y="269.9" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-1238017509-line-12">
+<clipPath id="terminal-3209169651-line-12">
 <rect x="0" y="294.3" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-1238017509-line-13">
+<clipPath id="terminal-3209169651-line-13">
 <rect x="0" y="318.7" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-1238017509-line-14">
+<clipPath id="terminal-3209169651-line-14">
 <rect x="0" y="343.1" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-1238017509-line-15">
+<clipPath id="terminal-3209169651-line-15">
 <rect x="0" y="367.5" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-1238017509-line-16">
+<clipPath id="terminal-3209169651-line-16">
 <rect x="0" y="391.9" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-1238017509-line-17">
+<clipPath id="terminal-3209169651-line-17">
 <rect x="0" y="416.3" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-1238017509-line-18">
+<clipPath id="terminal-3209169651-line-18">
 <rect x="0" y="440.7" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-1238017509-line-19">
+<clipPath id="terminal-3209169651-line-19">
 <rect x="0" y="465.1" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-1238017509-line-20">
+<clipPath id="terminal-3209169651-line-20">
 <rect x="0" y="489.5" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-1238017509-line-21">
+<clipPath id="terminal-3209169651-line-21">
 <rect x="0" y="513.9" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-1238017509-line-22">
+<clipPath id="terminal-3209169651-line-22">
 <rect x="0" y="538.3" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-1238017509-line-23">
+<clipPath id="terminal-3209169651-line-23">
 <rect x="0" y="562.7" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-1238017509-line-24">
+<clipPath id="terminal-3209169651-line-24">
 <rect x="0" y="587.1" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-1238017509-line-25">
+<clipPath id="terminal-3209169651-line-25">
 <rect x="0" y="611.5" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-1238017509-line-26">
+<clipPath id="terminal-3209169651-line-26">
 <rect x="0" y="635.9" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-1238017509-line-27">
+<clipPath id="terminal-3209169651-line-27">
 <rect x="0" y="660.3" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-1238017509-line-28">
+<clipPath id="terminal-3209169651-line-28">
 <rect x="0" y="684.7" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-1238017509-line-29">
+<clipPath id="terminal-3209169651-line-29">
 <rect x="0" y="709.1" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-1238017509-line-30">
+<clipPath id="terminal-3209169651-line-30">
 <rect x="0" y="733.5" width="1952" height="24.65"/>
+</clipPath>
+<clipPath id="terminal-3209169651-line-31">
+<rect x="0" y="757.9" width="1952" height="24.65"/>
+</clipPath>
+<clipPath id="terminal-3209169651-line-32">
+<rect x="0" y="782.3" width="1952" height="24.65"/>
 </clipPath>
 </defs>
 <g transform="translate(9, 0)">
-<g class="terminal-1238017509-matrix">
-<text class="terminal-1238017509-r1" x="0" y="20" textLength="463.6" clip-path="url(#terminal-1238017509-line-0)">$ python -m rsynccheck.cli hash --help</text>
-<text class="terminal-1238017509-r1" x="1952" y="20" textLength="12.2" clip-path="url(#terminal-1238017509-line-0)">
+<g class="terminal-3209169651-matrix">
+<text class="terminal-3209169651-r1" x="0" y="20" textLength="463.6" clip-path="url(#terminal-3209169651-line-0)">$ python -m rsynccheck.cli hash --help</text>
+<text class="terminal-3209169651-r1" x="1952" y="20" textLength="12.2" clip-path="url(#terminal-3209169651-line-0)">
 </text>
-<text class="terminal-1238017509-r1" x="0" y="44.4" textLength="1866.6" clip-path="url(#terminal-1238017509-line-1)">usage: python -m rsynccheck.cli hash [-h] --directory DIRECTORY [--file-iter-method {iterdir,git,auto}] [--chunk-size CHUNK_SIZE] --audit-file AUDIT_FILE</text>
-<text class="terminal-1238017509-r1" x="1952" y="44.4" textLength="12.2" clip-path="url(#terminal-1238017509-line-1)">
+<text class="terminal-3209169651-r1" x="0" y="44.4" textLength="1866.6" clip-path="url(#terminal-3209169651-line-1)">usage: python -m rsynccheck.cli hash [-h] --directory DIRECTORY [--file-iter-method {iterdir,git,auto}] [--chunk-size CHUNK_SIZE] --audit-file AUDIT_FILE</text>
+<text class="terminal-3209169651-r1" x="1952" y="44.4" textLength="12.2" clip-path="url(#terminal-3209169651-line-1)">
 </text>
-<text class="terminal-1238017509-r1" x="0" y="68.8" textLength="1073.6" clip-path="url(#terminal-1238017509-line-2)">                                     [--ignorefile IGNOREFILE] [--ignoreline IGNORELINE]</text>
-<text class="terminal-1238017509-r1" x="1952" y="68.8" textLength="12.2" clip-path="url(#terminal-1238017509-line-2)">
+<text class="terminal-3209169651-r1" x="0" y="68.8" textLength="1586" clip-path="url(#terminal-3209169651-line-2)">                                     [--ignorefile IGNOREFILE] [--ignoreline IGNORELINE] [--special-ignorefile SPECIAL_IGNOREFILE]</text>
+<text class="terminal-3209169651-r1" x="1952" y="68.8" textLength="12.2" clip-path="url(#terminal-3209169651-line-2)">
 </text>
-<text class="terminal-1238017509-r1" x="0" y="93.2" textLength="1695.8" clip-path="url(#terminal-1238017509-line-3)">                                     [--progress {fraction,percent,json,json-compact,table,yaml,yaml-debug,none}] [--group-size GROUP_SIZE]</text>
-<text class="terminal-1238017509-r1" x="1952" y="93.2" textLength="12.2" clip-path="url(#terminal-1238017509-line-3)">
+<text class="terminal-3209169651-r1" x="0" y="93.2" textLength="1695.8" clip-path="url(#terminal-3209169651-line-3)">                                     [--progress {fraction,percent,json,json-compact,table,yaml,yaml-debug,none}] [--group-size GROUP_SIZE]</text>
+<text class="terminal-3209169651-r1" x="1952" y="93.2" textLength="12.2" clip-path="url(#terminal-3209169651-line-3)">
 </text>
-<text class="terminal-1238017509-r1" x="0" y="117.6" textLength="1415.2" clip-path="url(#terminal-1238017509-line-4)">                                     [--max-workers MAX_WORKERS] [--hash-shell-str HASH_SHELL_STR] [--dd-cmd DD_CMD]</text>
-<text class="terminal-1238017509-r1" x="1952" y="117.6" textLength="12.2" clip-path="url(#terminal-1238017509-line-4)">
+<text class="terminal-3209169651-r1" x="0" y="117.6" textLength="1415.2" clip-path="url(#terminal-3209169651-line-4)">                                     [--max-workers MAX_WORKERS] [--hash-shell-str HASH_SHELL_STR] [--dd-cmd DD_CMD]</text>
+<text class="terminal-3209169651-r1" x="1952" y="117.6" textLength="12.2" clip-path="url(#terminal-3209169651-line-4)">
 </text>
-<text class="terminal-1238017509-r1" x="1952" y="142" textLength="12.2" clip-path="url(#terminal-1238017509-line-5)">
+<text class="terminal-3209169651-r1" x="1952" y="142" textLength="12.2" clip-path="url(#terminal-3209169651-line-5)">
 </text>
-<text class="terminal-1238017509-r1" x="0" y="166.4" textLength="231.8" clip-path="url(#terminal-1238017509-line-6)">optional arguments:</text>
-<text class="terminal-1238017509-r1" x="1952" y="166.4" textLength="12.2" clip-path="url(#terminal-1238017509-line-6)">
+<text class="terminal-3209169651-r1" x="0" y="166.4" textLength="231.8" clip-path="url(#terminal-3209169651-line-6)">optional arguments:</text>
+<text class="terminal-3209169651-r1" x="1952" y="166.4" textLength="12.2" clip-path="url(#terminal-3209169651-line-6)">
 </text>
-<text class="terminal-1238017509-r1" x="0" y="190.8" textLength="671" clip-path="url(#terminal-1238017509-line-7)">  -h, --help            show this help message and exit</text>
-<text class="terminal-1238017509-r1" x="1952" y="190.8" textLength="12.2" clip-path="url(#terminal-1238017509-line-7)">
+<text class="terminal-3209169651-r1" x="0" y="190.8" textLength="671" clip-path="url(#terminal-3209169651-line-7)">  -h, --help            show this help message and exit</text>
+<text class="terminal-3209169651-r1" x="1952" y="190.8" textLength="12.2" clip-path="url(#terminal-3209169651-line-7)">
 </text>
-<text class="terminal-1238017509-r1" x="0" y="215.2" textLength="280.6" clip-path="url(#terminal-1238017509-line-8)">  --directory DIRECTORY</text>
-<text class="terminal-1238017509-r1" x="1952" y="215.2" textLength="12.2" clip-path="url(#terminal-1238017509-line-8)">
+<text class="terminal-3209169651-r1" x="0" y="215.2" textLength="280.6" clip-path="url(#terminal-3209169651-line-8)">  --directory DIRECTORY</text>
+<text class="terminal-3209169651-r1" x="1952" y="215.2" textLength="12.2" clip-path="url(#terminal-3209169651-line-8)">
 </text>
-<text class="terminal-1238017509-r1" x="0" y="239.6" textLength="512.4" clip-path="url(#terminal-1238017509-line-9)">                        Directory to hash.</text>
-<text class="terminal-1238017509-r1" x="1952" y="239.6" textLength="12.2" clip-path="url(#terminal-1238017509-line-9)">
+<text class="terminal-3209169651-r1" x="0" y="239.6" textLength="512.4" clip-path="url(#terminal-3209169651-line-9)">                        Directory to hash.</text>
+<text class="terminal-3209169651-r1" x="1952" y="239.6" textLength="12.2" clip-path="url(#terminal-3209169651-line-9)">
 </text>
-<text class="terminal-1238017509-r1" x="0" y="264" textLength="475.8" clip-path="url(#terminal-1238017509-line-10)">  --file-iter-method {iterdir,git,auto}</text>
-<text class="terminal-1238017509-r1" x="1952" y="264" textLength="12.2" clip-path="url(#terminal-1238017509-line-10)">
+<text class="terminal-3209169651-r1" x="0" y="264" textLength="475.8" clip-path="url(#terminal-3209169651-line-10)">  --file-iter-method {iterdir,git,auto}</text>
+<text class="terminal-3209169651-r1" x="1952" y="264" textLength="12.2" clip-path="url(#terminal-3209169651-line-10)">
 </text>
-<text class="terminal-1238017509-r1" x="0" y="288.4" textLength="1927.6" clip-path="url(#terminal-1238017509-line-11)">                        Method to use to list files. git ls-files to enumerate staged files. iterdir, iterates the file system. auto uses git if the directory</text>
-<text class="terminal-1238017509-r1" x="1952" y="288.4" textLength="12.2" clip-path="url(#terminal-1238017509-line-11)">
+<text class="terminal-3209169651-r1" x="0" y="288.4" textLength="1927.6" clip-path="url(#terminal-3209169651-line-11)">                        Method to use to list files. git ls-files to enumerate staged files. iterdir, iterates the file system. auto uses git if the directory</text>
+<text class="terminal-3209169651-r1" x="1952" y="288.4" textLength="12.2" clip-path="url(#terminal-3209169651-line-11)">
 </text>
-<text class="terminal-1238017509-r1" x="0" y="312.8" textLength="939.4" clip-path="url(#terminal-1238017509-line-12)">                        is a git repo, otherwise iterdir. Default is iterdir.</text>
-<text class="terminal-1238017509-r1" x="1952" y="312.8" textLength="12.2" clip-path="url(#terminal-1238017509-line-12)">
+<text class="terminal-3209169651-r1" x="0" y="312.8" textLength="939.4" clip-path="url(#terminal-3209169651-line-12)">                        is a git repo, otherwise iterdir. Default is iterdir.</text>
+<text class="terminal-3209169651-r1" x="1952" y="312.8" textLength="12.2" clip-path="url(#terminal-3209169651-line-12)">
 </text>
-<text class="terminal-1238017509-r1" x="0" y="337.2" textLength="305" clip-path="url(#terminal-1238017509-line-13)">  --chunk-size CHUNK_SIZE</text>
-<text class="terminal-1238017509-r1" x="1952" y="337.2" textLength="12.2" clip-path="url(#terminal-1238017509-line-13)">
+<text class="terminal-3209169651-r1" x="0" y="337.2" textLength="305" clip-path="url(#terminal-3209169651-line-13)">  --chunk-size CHUNK_SIZE</text>
+<text class="terminal-3209169651-r1" x="1952" y="337.2" textLength="12.2" clip-path="url(#terminal-3209169651-line-13)">
 </text>
-<text class="terminal-1238017509-r1" x="0" y="361.6" textLength="976" clip-path="url(#terminal-1238017509-line-14)">                        Chunk size to use when hashing files. Default is 4.2 MB.</text>
-<text class="terminal-1238017509-r1" x="1952" y="361.6" textLength="12.2" clip-path="url(#terminal-1238017509-line-14)">
+<text class="terminal-3209169651-r1" x="0" y="361.6" textLength="976" clip-path="url(#terminal-3209169651-line-14)">                        Chunk size to use when hashing files. Default is 4.2 MB.</text>
+<text class="terminal-3209169651-r1" x="1952" y="361.6" textLength="12.2" clip-path="url(#terminal-3209169651-line-14)">
 </text>
-<text class="terminal-1238017509-r1" x="0" y="386" textLength="305" clip-path="url(#terminal-1238017509-line-15)">  --audit-file AUDIT_FILE</text>
-<text class="terminal-1238017509-r1" x="1952" y="386" textLength="12.2" clip-path="url(#terminal-1238017509-line-15)">
+<text class="terminal-3209169651-r1" x="0" y="386" textLength="305" clip-path="url(#terminal-3209169651-line-15)">  --audit-file AUDIT_FILE</text>
+<text class="terminal-3209169651-r1" x="1952" y="386" textLength="12.2" clip-path="url(#terminal-3209169651-line-15)">
 </text>
-<text class="terminal-1238017509-r1" x="0" y="410.4" textLength="878.4" clip-path="url(#terminal-1238017509-line-16)">                        File to output the hashes to, used for auditing.</text>
-<text class="terminal-1238017509-r1" x="1952" y="410.4" textLength="12.2" clip-path="url(#terminal-1238017509-line-16)">
+<text class="terminal-3209169651-r1" x="0" y="410.4" textLength="1122.4" clip-path="url(#terminal-3209169651-line-16)">                        File to output the hashes to, used for auditing. Use &quot;-&quot; for stdout.</text>
+<text class="terminal-3209169651-r1" x="1952" y="410.4" textLength="12.2" clip-path="url(#terminal-3209169651-line-16)">
 </text>
-<text class="terminal-1238017509-r1" x="0" y="434.8" textLength="305" clip-path="url(#terminal-1238017509-line-17)">  --ignorefile IGNOREFILE</text>
-<text class="terminal-1238017509-r1" x="1952" y="434.8" textLength="12.2" clip-path="url(#terminal-1238017509-line-17)">
+<text class="terminal-3209169651-r1" x="0" y="434.8" textLength="305" clip-path="url(#terminal-3209169651-line-17)">  --ignorefile IGNOREFILE</text>
+<text class="terminal-3209169651-r1" x="1952" y="434.8" textLength="12.2" clip-path="url(#terminal-3209169651-line-17)">
 </text>
-<text class="terminal-1238017509-r1" x="0" y="459.2" textLength="1891" clip-path="url(#terminal-1238017509-line-18)">                        File containing additional ignore patterns. Follows gitignore syntax. See &lt;https://github.com/cpburnz/python-pathspec&gt;. Can be used</text>
-<text class="terminal-1238017509-r1" x="1952" y="459.2" textLength="12.2" clip-path="url(#terminal-1238017509-line-18)">
+<text class="terminal-3209169651-r1" x="0" y="459.2" textLength="1891" clip-path="url(#terminal-3209169651-line-18)">                        File containing additional ignore patterns. Follows gitignore syntax. See &lt;https://github.com/cpburnz/python-pathspec&gt;. Can be used</text>
+<text class="terminal-3209169651-r1" x="1952" y="459.2" textLength="12.2" clip-path="url(#terminal-3209169651-line-18)">
 </text>
-<text class="terminal-1238017509-r1" x="0" y="483.6" textLength="475.8" clip-path="url(#terminal-1238017509-line-19)">                        more than once.</text>
-<text class="terminal-1238017509-r1" x="1952" y="483.6" textLength="12.2" clip-path="url(#terminal-1238017509-line-19)">
+<text class="terminal-3209169651-r1" x="0" y="483.6" textLength="1098" clip-path="url(#terminal-3209169651-line-19)">                        more than once. Path is interpreted as relative to the user's cwd.</text>
+<text class="terminal-3209169651-r1" x="1952" y="483.6" textLength="12.2" clip-path="url(#terminal-3209169651-line-19)">
 </text>
-<text class="terminal-1238017509-r1" x="0" y="508" textLength="305" clip-path="url(#terminal-1238017509-line-20)">  --ignoreline IGNORELINE</text>
-<text class="terminal-1238017509-r1" x="1952" y="508" textLength="12.2" clip-path="url(#terminal-1238017509-line-20)">
+<text class="terminal-3209169651-r1" x="0" y="508" textLength="305" clip-path="url(#terminal-3209169651-line-20)">  --ignoreline IGNORELINE</text>
+<text class="terminal-3209169651-r1" x="1952" y="508" textLength="12.2" clip-path="url(#terminal-3209169651-line-20)">
 </text>
-<text class="terminal-1238017509-r1" x="0" y="532.4" textLength="1744.6" clip-path="url(#terminal-1238017509-line-21)">                        Ignore pattern. Follows gitignore syntax. See &lt;https://github.com/cpburnz/python-pathspec&gt;. Can be used more than once.</text>
-<text class="terminal-1238017509-r1" x="1952" y="532.4" textLength="12.2" clip-path="url(#terminal-1238017509-line-21)">
+<text class="terminal-3209169651-r1" x="0" y="532.4" textLength="1744.6" clip-path="url(#terminal-3209169651-line-21)">                        Ignore pattern. Follows gitignore syntax. See &lt;https://github.com/cpburnz/python-pathspec&gt;. Can be used more than once.</text>
+<text class="terminal-3209169651-r1" x="1952" y="532.4" textLength="12.2" clip-path="url(#terminal-3209169651-line-21)">
 </text>
-<text class="terminal-1238017509-r1" x="0" y="556.8" textLength="927.2" clip-path="url(#terminal-1238017509-line-22)">  --progress {fraction,percent,json,json-compact,table,yaml,yaml-debug,none}</text>
-<text class="terminal-1238017509-r1" x="1952" y="556.8" textLength="12.2" clip-path="url(#terminal-1238017509-line-22)">
+<text class="terminal-3209169651-r1" x="0" y="556.8" textLength="500.2" clip-path="url(#terminal-3209169651-line-22)">  --special-ignorefile SPECIAL_IGNOREFILE</text>
+<text class="terminal-3209169651-r1" x="1952" y="556.8" textLength="12.2" clip-path="url(#terminal-3209169651-line-22)">
 </text>
-<text class="terminal-1238017509-r1" x="0" y="581.2" textLength="1915.4" clip-path="url(#terminal-1238017509-line-23)">                        Progress format to use. Default is &quot;yaml&quot;. Choices are ('fraction', 'percent', 'json', 'json-compact', 'table', 'yaml', 'yaml-debug',</text>
-<text class="terminal-1238017509-r1" x="1952" y="581.2" textLength="12.2" clip-path="url(#terminal-1238017509-line-23)">
+<text class="terminal-3209169651-r1" x="0" y="581.2" textLength="1354.2" clip-path="url(#terminal-3209169651-line-23)">                        Searches for this file in the root of the directory and treats it like an --ignorefile.</text>
+<text class="terminal-3209169651-r1" x="1952" y="581.2" textLength="12.2" clip-path="url(#terminal-3209169651-line-23)">
 </text>
-<text class="terminal-1238017509-r1" x="0" y="605.6" textLength="390.4" clip-path="url(#terminal-1238017509-line-24)">                        'none').</text>
-<text class="terminal-1238017509-r1" x="1952" y="605.6" textLength="12.2" clip-path="url(#terminal-1238017509-line-24)">
+<text class="terminal-3209169651-r1" x="0" y="605.6" textLength="927.2" clip-path="url(#terminal-3209169651-line-24)">  --progress {fraction,percent,json,json-compact,table,yaml,yaml-debug,none}</text>
+<text class="terminal-3209169651-r1" x="1952" y="605.6" textLength="12.2" clip-path="url(#terminal-3209169651-line-24)">
 </text>
-<text class="terminal-1238017509-r1" x="0" y="630" textLength="305" clip-path="url(#terminal-1238017509-line-25)">  --group-size GROUP_SIZE</text>
-<text class="terminal-1238017509-r1" x="1952" y="630" textLength="12.2" clip-path="url(#terminal-1238017509-line-25)">
+<text class="terminal-3209169651-r1" x="0" y="630" textLength="1915.4" clip-path="url(#terminal-3209169651-line-25)">                        Progress format to use. Default is &quot;yaml&quot;. Choices are ('fraction', 'percent', 'json', 'json-compact', 'table', 'yaml', 'yaml-debug',</text>
+<text class="terminal-3209169651-r1" x="1952" y="630" textLength="12.2" clip-path="url(#terminal-3209169651-line-25)">
 </text>
-<text class="terminal-1238017509-r1" x="0" y="654.4" textLength="1159" clip-path="url(#terminal-1238017509-line-26)">                        Number of chunks to run on a single thread, in sequence. Default is 10.</text>
-<text class="terminal-1238017509-r1" x="1952" y="654.4" textLength="12.2" clip-path="url(#terminal-1238017509-line-26)">
+<text class="terminal-3209169651-r1" x="0" y="654.4" textLength="390.4" clip-path="url(#terminal-3209169651-line-26)">                        'none').</text>
+<text class="terminal-3209169651-r1" x="1952" y="654.4" textLength="12.2" clip-path="url(#terminal-3209169651-line-26)">
 </text>
-<text class="terminal-1238017509-r1" x="0" y="678.8" textLength="329.4" clip-path="url(#terminal-1238017509-line-27)">  --max-workers MAX_WORKERS</text>
-<text class="terminal-1238017509-r1" x="1952" y="678.8" textLength="12.2" clip-path="url(#terminal-1238017509-line-27)">
+<text class="terminal-3209169651-r1" x="0" y="678.8" textLength="305" clip-path="url(#terminal-3209169651-line-27)">  --group-size GROUP_SIZE</text>
+<text class="terminal-3209169651-r1" x="1952" y="678.8" textLength="12.2" clip-path="url(#terminal-3209169651-line-27)">
 </text>
-<text class="terminal-1238017509-r1" x="0" y="703.2" textLength="1476.2" clip-path="url(#terminal-1238017509-line-28)">                        Maximum number of workers to use for hashing. To use the number of CPUs, set to 0. Default is 10.</text>
-<text class="terminal-1238017509-r1" x="1952" y="703.2" textLength="12.2" clip-path="url(#terminal-1238017509-line-28)">
+<text class="terminal-3209169651-r1" x="0" y="703.2" textLength="1159" clip-path="url(#terminal-3209169651-line-28)">                        Number of chunks to run on a single thread, in sequence. Default is 10.</text>
+<text class="terminal-3209169651-r1" x="1952" y="703.2" textLength="12.2" clip-path="url(#terminal-3209169651-line-28)">
 </text>
-<text class="terminal-1238017509-r1" x="0" y="727.6" textLength="402.6" clip-path="url(#terminal-1238017509-line-29)">  --hash-shell-str HASH_SHELL_STR</text>
-<text class="terminal-1238017509-r1" x="1952" y="727.6" textLength="12.2" clip-path="url(#terminal-1238017509-line-29)">
+<text class="terminal-3209169651-r1" x="0" y="727.6" textLength="329.4" clip-path="url(#terminal-3209169651-line-29)">  --max-workers MAX_WORKERS</text>
+<text class="terminal-3209169651-r1" x="1952" y="727.6" textLength="12.2" clip-path="url(#terminal-3209169651-line-29)">
 </text>
-<text class="terminal-1238017509-r1" x="0" y="752" textLength="1073.6" clip-path="url(#terminal-1238017509-line-30)">                        Shell string/command to hash files with. Default is &quot;xxhsum -H0&quot;</text>
-<text class="terminal-1238017509-r1" x="1952" y="752" textLength="12.2" clip-path="url(#terminal-1238017509-line-30)">
+<text class="terminal-3209169651-r1" x="0" y="752" textLength="1476.2" clip-path="url(#terminal-3209169651-line-30)">                        Maximum number of workers to use for hashing. To use the number of CPUs, set to 0. Default is 10.</text>
+<text class="terminal-3209169651-r1" x="1952" y="752" textLength="12.2" clip-path="url(#terminal-3209169651-line-30)">
 </text>
-<text class="terminal-1238017509-r1" x="0" y="776.4" textLength="829.6" clip-path="url(#terminal-1238017509-line-31)">  --dd-cmd DD_CMD       Command to copy files with. Default is &quot;dd&quot;.</text>
-<text class="terminal-1238017509-r1" x="1952" y="776.4" textLength="12.2" clip-path="url(#terminal-1238017509-line-31)">
+<text class="terminal-3209169651-r1" x="0" y="776.4" textLength="402.6" clip-path="url(#terminal-3209169651-line-31)">  --hash-shell-str HASH_SHELL_STR</text>
+<text class="terminal-3209169651-r1" x="1952" y="776.4" textLength="12.2" clip-path="url(#terminal-3209169651-line-31)">
+</text>
+<text class="terminal-3209169651-r1" x="0" y="800.8" textLength="1073.6" clip-path="url(#terminal-3209169651-line-32)">                        Shell string/command to hash files with. Default is &quot;xxhsum -H0&quot;</text>
+<text class="terminal-3209169651-r1" x="1952" y="800.8" textLength="12.2" clip-path="url(#terminal-3209169651-line-32)">
+</text>
+<text class="terminal-3209169651-r1" x="0" y="825.2" textLength="829.6" clip-path="url(#terminal-3209169651-line-33)">  --dd-cmd DD_CMD       Command to copy files with. Default is &quot;dd&quot;.</text>
+<text class="terminal-3209169651-r1" x="1952" y="825.2" textLength="12.2" clip-path="url(#terminal-3209169651-line-33)">
 </text>
 </g>
 </g>

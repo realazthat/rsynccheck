@@ -13,7 +13,13 @@ TOML=${PROJ_PATH}/pyproject.toml EXTRA=dev \
   TARGET_VENV_PATH="${PWD}/.cache/scripts/.venv" \
   bash "${PROJ_PATH}/scripts/utilities/ensure-reqs.sh"
 
-bash scripts/run-all-examples.sh
+# This happens in generate.sh.
+# bash scripts/run-all-examples.sh
+
+mkdir -p .deleteme
+unbuffer bash ./rsynccheck/examples/hash-audit_example.sh \
+  > .deleteme/hash-audit_example.output 2>&1
+
 
 python -m snipinator.cli \
   -t "${PROJ_PATH}/README.md.jinja2" \

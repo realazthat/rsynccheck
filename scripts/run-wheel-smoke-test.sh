@@ -25,9 +25,10 @@ TOML=${PROJ_PATH}/pyproject.toml EXTRA=dev \
 # Build wheel
 cd "${TMP_PROJ_PATH}"
 
-
-# Copy everything including hidden files, but ignore errors.
-cp -a "${PROJ_PATH}/." "${TMP_PROJ_PATH}" || true
+rsync -av \
+  --exclude='.git' --exclude='.venv' --exclude='.cache' --exclude='.trunk' \
+  --exclude='.deleteme' --exclude='.ruff_cache' --exclude='dist' \
+  "${PROJ_PATH}/." "${TMP_PROJ_PATH}"
 
 # Make everything writable, because `python -m build` copies everything and then
 # deletes it, which is a problem if something is read only.

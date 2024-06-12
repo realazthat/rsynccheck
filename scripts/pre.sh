@@ -22,7 +22,10 @@ export TOML="${PROJ_PATH}/pyproject.toml"
 EXTRA=dev bash scripts/utilities/pin-extra-reqs.sh
 EXTRA=prod bash scripts/utilities/pin-extra-reqs.sh
 bash scripts/quickrun.sh
-bash scripts/run-all-examples.sh
+# This happens in generate.sh.
+# bash scripts/generate-all-examples.sh
+# This happens in generate.sh.
+# bash scripts/run-all-examples.sh
 bash scripts/run-all-tests.sh
 bash scripts/format.sh
 bash scripts/type-check.sh

@@ -83,4 +83,4 @@ docker run --rm --tty \
   --output-format table \
   --mismatch-exit 1 \
   --directory "${DST_DIRECTORY}"
-# CORRENT_SNIPPET_END
+# CORRECT_SNIPPET_END
