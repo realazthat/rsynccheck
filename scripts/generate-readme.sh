@@ -13,7 +13,21 @@ TOML=${PROJ_PATH}/pyproject.toml EXTRA=dev \
   TARGET_VENV_PATH="${PWD}/.cache/scripts/.venv" \
   bash "${PROJ_PATH}/scripts/utilities/ensure-reqs.sh"
 
-bash scripts/run-all-examples.sh
+# Avoid the terminal-width==0 warning, because that happens in GH actions,
+# and makes the example output inconsistent.
+export SUPPRESS_TERMINAL_WARNING=1
+
+
+
+# This happens in generate.sh.
+# bash scripts/run-all-examples.sh
+
+mkdir -p .deleteme
+# Try to make terminal output as consistent as possible.
+TERM=xterm-256color COLUMNS=80 LINES=40 \
+unbuffer bash ./rsynccheck/examples/hash-audit_example.sh \
+  > .deleteme/hash-audit_example.output 2>&1
+
 
 python -m snipinator.cli \
   -t "${PROJ_PATH}/README.md.jinja2" \

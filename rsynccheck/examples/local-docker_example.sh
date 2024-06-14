@@ -29,7 +29,7 @@ DST_DIRECTORY=.deleteme/destination
 rm -Rf "${DST_DIRECTORY}"
 mkdir -p "${DST_DIRECTORY}"
 
-set +x
+set +x +v
 find "${SRC_DIRECTORY}" -type f -name "*" -print0 | while IFS= read -r -d '' PWD_REL_PATH; do
   ABS_PATH=$(realpath "${PWD_REL_PATH}")
   SRC_REL_PATH="${PWD_REL_PATH#${SRC_DIRECTORY}/}"
@@ -37,17 +37,14 @@ find "${SRC_DIRECTORY}" -type f -name "*" -print0 | while IFS= read -r -d '' PWD
   DST_PATH="${DST_DIRECTORY}/${SRC_REL_PATH}"
   mkdir -p "$(dirname ${DST_PATH})"
   # Copy half the file.
-  set -x; dd if="${ABS_PATH}" of="${DST_PATH}" bs=1 count=$((SIZE/2)); set +x
+  dd if="${ABS_PATH}" of="${DST_PATH}" bs=1 count=$((SIZE/2)) > /dev/null 2>&1
 done
-set -x
+set -x -v
 
-# SNIPPET_START
+# INCORRECT_SNIPPET_START
 docker build -t my-rsynccheck-image .
 
-docker run --rm --tty \
-  -v "${PWD}:/data" \
-  my-rsynccheck-image --help
-
+# Generate the audit.yaml file.
 # /data in the docker image is the working directory, so paths are simpler.
 docker run --rm --tty \
   -v "${PWD}:/data" \
@@ -56,28 +53,34 @@ docker run --rm --tty \
   --ignorefile ".gitignore" \
   --ignoreline .trunk --ignoreline .git \
   --audit-file ".deleteme/check-changes-audit.yaml" \
+  --progress none \
   --chunk-size "${CHUNK_SIZE}" \
   --directory "${SRC_DIRECTORY}"
 
+# Check the audit.yaml file on the other machine.
 docker run --rm --tty \
   -v "${PWD}:/data" \
   my-rsynccheck-image \
   audit \
   --audit-file ".deleteme/check-changes-audit.yaml" \
-  --directory "${DST_DIRECTORY}" \
+  --progress none \
   --output-format table \
-  --mismatch-exit 0
-# SNIPPET_END
+  --mismatch-exit 0 \
+  --directory "${DST_DIRECTORY}"
+# INCORRECT_SNIPPET_END
 
 # Now copy all the files correctly.
 rm -Rf "${DST_DIRECTORY}"
 rsync -a "${SRC_DIRECTORY}/" "${DST_DIRECTORY}"
 
+# CORRECT_SNIPPET_START
 docker run --rm --tty \
   -v "${PWD}:/data" \
   my-rsynccheck-image \
   audit \
   --audit-file ".deleteme/check-changes-audit.yaml" \
-  --directory "${DST_DIRECTORY}" \
+  --progress none \
   --output-format table \
-  --mismatch-exit 1
+  --mismatch-exit 1 \
+  --directory "${DST_DIRECTORY}"
+# CORRECT_SNIPPET_END

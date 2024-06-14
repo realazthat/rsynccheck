@@ -15,10 +15,17 @@ function cleanup {
 trap cleanup EXIT
 
 ################################################################################
-
-
-# Copy everything including hidden files, but ignore errors.
-cp -a "${PROJ_PATH}/." "${TMP_PROJ_PATH}" || true
+VENV_PATH="${PWD}/.cache/scripts/.venv" \
+  source "${PROJ_PATH}/scripts/utilities/ensure-venv.sh"
+TOML=${PROJ_PATH}/pyproject.toml EXTRA=dev \
+  DEV_VENV_PATH="${PWD}/.cache/scripts/.venv" \
+  TARGET_VENV_PATH="${PWD}/.cache/scripts/.venv" \
+  bash "${PROJ_PATH}/scripts/utilities/ensure-reqs.sh"
+################################################################################
+rsync -av \
+  --exclude='.git' --exclude='.venv' --exclude='.cache' --exclude='.trunk' \
+  --exclude='.deleteme' --exclude='.ruff_cache' --exclude='dist' \
+  "${PROJ_PATH}/." "${TMP_PROJ_PATH}"
 
 # Make everything writable, because `python -m build` copies everything and then
 # deletes it, which is a problem if something is read only.

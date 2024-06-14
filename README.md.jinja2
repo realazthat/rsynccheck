@@ -93,10 +93,25 @@ pip install git+https://github.com/realazthat/{{project_name}}.git@v{{last_stabl
 
 ## 🚜 Usage
 
+Example:
+
 <!--{{ snippet('./rsynccheck/examples/hash-audit_example.sh',
-               start='# SNIPPET_START',
-               end='\n# SNIPPET_END',
+               start='# INCORRECT_SNIPPET_START',
+               end='\n# INCORRECT_SNIPPET_END',
                backtickify='bash',
+               decomentify='nl') }}-->
+
+Screenshot in terminal:
+
+<!--{{ shell('cat .deleteme/hash-audit_example.output',
+               start='# INCORRECT_SNIPPET_START',
+               end='\n# INCORRECT_SNIPPET_END',
+               rich='README.example.generated.svg',
+               rich_alt='Output of `./snipinator/examples/example_example.sh`',
+               rich_bg_color='black',
+               rich_term='xterm-256color',
+               rich_cols=160,
+               include_args=False,
                decomentify='nl') }}-->
 
 ## 💻 Command Line Options
@@ -104,6 +119,22 @@ pip install git+https://github.com/realazthat/{{project_name}}.git@v{{last_stabl
 <!--{{ shell('python -m rsynccheck.cli --help',
              rich='README.help.generated.svg',
              rich_alt='Output of `python -m rsynccheck.cli --help`',
+             rich_bg_color='black',
+             rich_term='xterm-256color',
+             rich_cols=160,
+             decomentify='nl') }}-->
+
+<!--{{ shell('python -m rsynccheck.cli hash --help',
+             rich='README.hash.help.generated.svg',
+             rich_alt='Output of `python -m rsynccheck.cli hash --help`',
+             rich_bg_color='black',
+             rich_term='xterm-256color',
+             rich_cols=160,
+             decomentify='nl') }}-->
+
+<!--{{ shell('python -m rsynccheck.cli audit --help',
+             rich='README.audit.help.generated.svg',
+             rich_alt='Output of `python -m rsynccheck.cli audit --help`',
              rich_bg_color='black',
              rich_term='xterm-256color',
              rich_cols=160,
@@ -130,19 +161,18 @@ tag.
 **NOTE: You can't use a custom hashing command with the Docker image, because it
 isn't available inside the container. xxhash is installed in the image.**
 
-```bash
-# Use the published images at ghcr.io/realazthat/{{project_name}}.
-docker run --rm -it ghcr.io/realazthat/{{project_name}}:v{{last_stable_release}} --help
-
-
-```
+<!--{{snippet('./rsynccheck/examples/remote-docker_example-noautorun.sh',
+              start='# INCORRECT_SNIPPET_START',
+              end='\n# INCORRECT_SNIPPET_END',
+              backtickify='bash',
+              decomentify='nl')|trim}}-->
 
 If you want to build the image yourself, you can use the Dockerfile in the
 repository.
 
 <!--{{snippet('./rsynccheck/examples/local-docker_example.sh',
-              start='# SNIPPET_START',
-              end='\n# SNIPPET_END',
+              start='# INCORRECT_SNIPPET_START',
+              end='\n# INCORRECT_SNIPPET_END',
               backtickify='bash',
               decomentify='nl')|trim}}-->
 

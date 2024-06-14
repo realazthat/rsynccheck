@@ -91,37 +91,55 @@ files.
 pip install rsynccheck
 
 # Install from git (https://github.com/realazthat/rsynccheck)
-pip install git+https://github.com/realazthat/rsynccheck.git@v0.0.1
+pip install git+https://github.com/realazthat/rsynccheck.git@v0.1.0
 ```
 
 ## 🚜 Usage
 
+Example:
+
 <!---->
 ```bash
 
-python -m rsynccheck.cli --help
-
+# Generate the audit.yaml file.
 python -m rsynccheck.cli \
   hash \
   --ignorefile ".gitignore" \
   --ignoreline .trunk --ignoreline .git \
   --audit-file ".deleteme/check-changes-audit.yaml" \
+  --progress none \
   --chunk-size "${CHUNK_SIZE}" \
   --directory "${SRC_DIRECTORY}"
 
+# Check the audit.yaml file on the other machine.
 python -m rsynccheck.cli \
   audit \
   --audit-file ".deleteme/check-changes-audit.yaml" \
-  --directory "${DST_DIRECTORY}" \
+  --progress none \
   --output-format table \
-  --mismatch-exit 0
+  --mismatch-exit 0 \
+  --directory "${DST_DIRECTORY}"
 ```
+<!---->
+
+Screenshot in terminal:
+
+<!---->
+<img src="README.example.generated.svg" alt="Output of `./snipinator/examples/example_example.sh`" />
 <!---->
 
 ## 💻 Command Line Options
 
 <!---->
 <img src="README.help.generated.svg" alt="Output of `python -m rsynccheck.cli --help`" />
+<!---->
+
+<!---->
+<img src="README.hash.help.generated.svg" alt="Output of `python -m rsynccheck.cli hash --help`" />
+<!---->
+
+<!---->
+<img src="README.audit.help.generated.svg" alt="Output of `python -m rsynccheck.cli audit --help`" />
 <!---->
 
 ## ✅ Requirements
@@ -145,12 +163,35 @@ tag.
 **NOTE: You can't use a custom hashing command with the Docker image, because it
 isn't available inside the container. xxhash is installed in the image.**
 
+<!---->
 ```bash
+
 # Use the published images at ghcr.io/realazthat/rsynccheck.
-docker run --rm -it ghcr.io/realazthat/rsynccheck:v0.0.1 --help
+# Generate the audit.yaml file.
+# /data in the docker image is the working directory, so paths are simpler.
+docker run --rm --tty \
+  -v "${PWD}:/data" \
+  ghcr.io/realazthat/rsynccheck:v0.1.0 \
+  hash \
+  --ignorefile ".gitignore" \
+  --ignoreline .trunk --ignoreline .git \
+  --audit-file ".deleteme/check-changes-audit.yaml" \
+  --progress none \
+  --chunk-size "${CHUNK_SIZE}" \
+  --directory "${SRC_DIRECTORY}"
 
-
+# Check the audit.yaml file on the other machine.
+docker run --rm --tty \
+  -v "${PWD}:/data" \
+  ghcr.io/realazthat/rsynccheck:v0.1.0 \
+  audit \
+  --audit-file ".deleteme/check-changes-audit.yaml" \
+  --progress none \
+  --output-format table \
+  --mismatch-exit 0 \
+  --directory "${DST_DIRECTORY}"
 ```
+<!---->
 
 If you want to build the image yourself, you can use the Dockerfile in the
 repository.
@@ -160,10 +201,7 @@ repository.
 
 docker build -t my-rsynccheck-image .
 
-docker run --rm --tty \
-  -v "${PWD}:/data" \
-  my-rsynccheck-image --help
-
+# Generate the audit.yaml file.
 # /data in the docker image is the working directory, so paths are simpler.
 docker run --rm --tty \
   -v "${PWD}:/data" \
@@ -172,17 +210,20 @@ docker run --rm --tty \
   --ignorefile ".gitignore" \
   --ignoreline .trunk --ignoreline .git \
   --audit-file ".deleteme/check-changes-audit.yaml" \
+  --progress none \
   --chunk-size "${CHUNK_SIZE}" \
   --directory "${SRC_DIRECTORY}"
 
+# Check the audit.yaml file on the other machine.
 docker run --rm --tty \
   -v "${PWD}:/data" \
   my-rsynccheck-image \
   audit \
   --audit-file ".deleteme/check-changes-audit.yaml" \
-  --directory "${DST_DIRECTORY}" \
+  --progress none \
   --output-format table \
-  --mismatch-exit 0
+  --mismatch-exit 0 \
+  --directory "${DST_DIRECTORY}"
 ```
 <!---->
 
@@ -236,6 +277,18 @@ Not complete, and not necessarily up to date. Make a PR
     jq: dependency for [yq](https://github.com/kislyuk/yq), which is used to generate
       the README; the README generator needs to use `tomlq` (which is a part of `yq`)
       to query `pyproject.toml`.
+    unzip: scripts (pyenv).
+    curl: scripts (pyenv).
+    git-core: scripts (pyenv).
+    gcc: scripts (pyenv).
+    make: scripts (pyenv).
+    zlib1g-dev: scripts (pyenv).
+    libbz2-dev: scripts (pyenv).
+    libreadline-dev: scripts (pyenv).
+    libsqlite3-dev: scripts (pyenv).
+    libssl-dev: scripts (pyenv).
+    libffi-dev: bdist_wheel (otherwise `pip install .` fails). If installing pyenv, this
+      must be installed _first_.
     
     ```
 
@@ -310,9 +363,9 @@ These instructions are for maintainers of the project.
 [13]:
   https://github.com/realazthat/rsynccheck/actions/workflows/build-and-test.yml
 [14]:
-  https://img.shields.io/github/commits-since/realazthat/rsynccheck/v0.0.1/master?style=plastic
+  https://img.shields.io/github/commits-since/realazthat/rsynccheck/v0.1.0/master?style=plastic
 [15]:
-  https://github.com/realazthat/rsynccheck/compare/v0.0.1...master
+  https://github.com/realazthat/rsynccheck/compare/v0.1.0...master
 [16]:
   https://img.shields.io/github/last-commit/realazthat/rsynccheck/master?style=plastic
 [17]: https://github.com/realazthat/rsynccheck/commits/master
@@ -320,13 +373,13 @@ These instructions are for maintainers of the project.
 [19]:
   https://img.shields.io/github/actions/workflow/status/realazthat/rsynccheck/build-and-test.yml?branch=develop&style=plastic
 [20]:
-  https://img.shields.io/github/commits-since/realazthat/rsynccheck/v0.0.1/develop?style=plastic
+  https://img.shields.io/github/commits-since/realazthat/rsynccheck/v0.1.0/develop?style=plastic
 [21]:
-  https://github.com/realazthat/rsynccheck/compare/v0.0.1...develop
+  https://github.com/realazthat/rsynccheck/compare/v0.1.0...develop
 [22]:
-  https://img.shields.io/github/commits-since/realazthat/rsynccheck/v0.0.1/develop?style=plastic
+  https://img.shields.io/github/commits-since/realazthat/rsynccheck/v0.1.0/develop?style=plastic
 [23]:
-  https://github.com/realazthat/rsynccheck/compare/v0.0.1...develop
+  https://github.com/realazthat/rsynccheck/compare/v0.1.0...develop
 [24]:
   https://img.shields.io/github/last-commit/realazthat/rsynccheck/develop?style=plastic
 [25]: https://github.com/realazthat/rsynccheck/commits/develop
