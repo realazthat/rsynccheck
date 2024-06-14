@@ -47,7 +47,7 @@ set -x -v
 # /data in the docker image is the working directory, so paths are simpler.
 docker run --rm --tty \
   -v "${PWD}:/data" \
-  ghcr.io/realazthat/rsynccheck:v0.0.1 \
+  ghcr.io/realazthat/rsynccheck:v0.1.0 \
   hash \
   --ignorefile ".gitignore" \
   --ignoreline .trunk --ignoreline .git \
@@ -59,7 +59,7 @@ docker run --rm --tty \
 # Check the audit.yaml file on the other machine.
 docker run --rm --tty \
   -v "${PWD}:/data" \
-  ghcr.io/realazthat/rsynccheck:v0.0.1 \
+  ghcr.io/realazthat/rsynccheck:v0.1.0 \
   audit \
   --audit-file ".deleteme/check-changes-audit.yaml" \
   --progress none \
@@ -75,7 +75,7 @@ rsync -a "${SRC_DIRECTORY}/" "${DST_DIRECTORY}"
 # CORRECT_SNIPPET_START
 docker run --rm --tty \
   -v "${PWD}:/data" \
-  ghcr.io/realazthat/rsynccheck:v0.0.1 \
+  ghcr.io/realazthat/rsynccheck:v0.1.0 \
   audit \
   --audit-file ".deleteme/check-changes-audit.yaml" \
   --progress none \
