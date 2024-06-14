@@ -11,17 +11,18 @@ RUN apt-get -y update && apt-get -y --no-install-recommends install bash=5.2.15-
   apt-get -y clean && \
   apt-get -y autoremove && \
   rm -rf /var/lib/apt/lists/* && \
+  useradd -m -d /home/user -s /bin/bash user && \
   pip install --no-cache-dir --upgrade pip setuptools wheel && \
-  mkdir -p /home/nobody/.local && \
-  chown -R nobody:nogroup /rsynccheck /home/nobody/.local && \
+  mkdir -p /home/user/.local && \
+  chown -R user:user /rsynccheck /home/user/.local && \
   chmod -R a+wrX /rsynccheck
 
 
-USER nobody
+USER user
 WORKDIR /rsynccheck
-ENV PATH=/home/nobody/.local/bin:$PATH
-ENV PYTHONPATH=/home/nobody/.local/lib/python3.12/site-packages
-RUN pip install --no-cache-dir --prefix=/home/nobody/.local .
+ENV PATH=/home/user/.local/bin:$PATH
+ENV PYTHONPATH=/home/user/.local/lib/python3.12/site-packages
+RUN pip install --no-cache-dir --prefix=/home/user/.local .
 
 # This is where the user will mount their data to.
 WORKDIR /data

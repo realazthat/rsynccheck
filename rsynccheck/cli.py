@@ -9,9 +9,9 @@ import argparse
 import asyncio
 import json
 import logging
+import os
 import pathlib
 import sys
-import warnings
 from contextlib import asynccontextmanager
 from pathlib import Path
 from shutil import get_terminal_size
@@ -31,6 +31,7 @@ from .utilities.error_utils import _ErrorContext
 
 logger = logging.getLogger(__name__)
 
+_DEFAULT_LOGS_ARTIFACTS_PATH = pathlib.Path('~/.rsynccheck/logs/artifacts')
 _DEFAULT_FILE_ITER_METHOD: _FileIterMethodLiteral = 'iterdir'
 _DEFAULT_HASH_SHELL_STR = 'xxhsum -H0'
 _DEFAULT_CHUNK_SIZE = 4096 * 1024
@@ -127,9 +128,9 @@ class _CustomRichHelpFormatter(RichHelpFormatter):
     if kwargs.get('width') is None:
       width, _ = get_terminal_size()
       if width == 0:
-        warnings.warn('Terminal width was set to 0, using default width of 80.',
-                      RuntimeWarning,
-                      stacklevel=0)
+        if not os.getenv('SUPPRESS_TERMINAL_WARNING'):
+          logger.warning(
+              'Terminal width was set to 0, using default width of 80.')
         # This is the default in get_terminal_size().
         width = 80
       # This is what HelpFormatter does to the width returned by
@@ -207,7 +208,8 @@ async def _HashMainFromArgs(args: argparse.Namespace, console: Console):
   show_progress: Optional[_FormatLiteral] = args.progress
   logs_artifacts_path = await _GetPath(anyio.Path(args.logs_artifacts_path))
 
-  err_ctx = await _ErrorContext.Create(logs_artifacts_path=logs_artifacts_path, key='hash')
+  err_ctx = await _ErrorContext.Create(logs_artifacts_path=logs_artifacts_path,
+                                       key='hash')
 
   async with err_ctx, \
         _OpenFileOrStdout(str(args.audit_file)) as audit_file_ostream:
@@ -233,7 +235,8 @@ async def _AuditMainFromArgs(args: argparse.Namespace, console: Console):
   mismatch_exit: int = args.mismatch_exit
   logs_artifacts_path = await _GetPath(anyio.Path(args.logs_artifacts_path))
 
-  err_ctx = await _ErrorContext.Create(logs_artifacts_path=logs_artifacts_path, key='audit')
+  err_ctx = await _ErrorContext.Create(logs_artifacts_path=logs_artifacts_path,
+                                       key='audit')
   async with err_ctx, _OpenFileOrStdin(args.audit_file) as audit_file_istream:
 
     audit_yaml_str: str = await audit_file_istream.read()
@@ -259,10 +262,13 @@ async def amain():
                                      formatter_class=_CustomRichHelpFormatter)
 
     parser.add_argument('--version', action='version', version=_build_version)
-    parser.add_argument('--logs-artifacts-path',
-                        type=pathlib.Path,
-                        default=Path('.logs/artifacts'),
-                        help='Path to store logs and artifacts.')
+    parser.add_argument(
+        '--logs-artifacts-path',
+        type=pathlib.Path,
+        default=_DEFAULT_LOGS_ARTIFACTS_PATH,
+        help=
+        f'Path to store logs and artifacts. Default is {_DEFAULT_LOGS_ARTIFACTS_PATH}.'
+    )
 
     cmd = parser.add_subparsers(required=True, dest='cmd')
     ############################################################################

@@ -20,6 +20,8 @@ from .base_types import IsJSONSerializable, JSONSerializable
 
 logger = logging.getLogger(__name__)
 
+_DEV_NULL_FILE_URI = 'file:///dev/null/you-did-not-set-debug-path'
+
 # class _CustomDumper(yaml.SafeDumper):
 
 #   def represent_tuple(self, data):
@@ -74,8 +76,11 @@ def _YamlDump(data: Any) -> str:
 class _LargeFileReference:
   """Used for internal purposes only, for tracking large files by _ErrorContext."""
 
-  def __init__(self, file_uri: str):
+  def __init__(self, *, yaml_path: Optional[anyio.Path], file_uri: str,
+               data: JSONSerializable):
+    self.yaml_path = yaml_path
     self.file_uri = file_uri
+    self.data = data
 
 
 class _ErrorContext:
@@ -103,9 +108,13 @@ class _ErrorContext:
 
   async def LargeToFile(self, name: str,
                         msg: JSONSerializable) -> _LargeFileReference:
+    if not IsJSONSerializable(msg):
+      raise ValueError(f'Value for {name} is not JSON serializable.')
+
     if self._error_context_path is None:
-      return _LargeFileReference(
-          file_uri='file:///dev/null/you-did-not-set-debug-path')
+      return _LargeFileReference(file_uri=_DEV_NULL_FILE_URI,
+                                 yaml_path=None,
+                                 data=msg)
     directory: anyio.Path = self._error_context_path / slugify(
         datetime.now().isoformat())
     await directory.mkdir(parents=True, exist_ok=True)
@@ -114,7 +123,9 @@ class _ErrorContext:
     await yaml_path.write_text(_YamlDump(msg))
     if not (yaml_path.is_absolute()):
       yaml_path = await yaml_path.absolute()
-    return _LargeFileReference(file_uri=yaml_path.as_uri())
+    return _LargeFileReference(yaml_path=yaml_path,
+                               file_uri=yaml_path.as_uri(),
+                               data=msg)
 
   async def Add(self, name: str, msg: JSONSerializable) -> None:
     if not isinstance(msg, _LargeFileReference) and not IsJSONSerializable(msg):
@@ -122,23 +133,28 @@ class _ErrorContext:
           f'Value for {name} is not JSON serializable.; type(msg): {type(msg)}')
     self._context[name] = msg
 
-  def Dump(self) -> JSONSerializable:
+  async def _Dump(self, context: dict) -> JSONSerializable:
     # TODO: Mark the large files to have a longer TTL if it is being dumped.
-    dumped = self._context.copy()
+    dumped = context.copy()
     for k, v in dumped.items():
       if isinstance(v, _LargeFileReference):
         dumped[k] = v.file_uri
+        if v.yaml_path is None:
+          continue
+        await v.yaml_path.parent.mkdir(parents=True, exist_ok=True)
+        async with await v.yaml_path.open('w') as f:
+          await f.write(_YamlDump(v.data))
     return dumped
 
-  def UserDump(self) -> JSONSerializable:
+  async def Dump(self) -> JSONSerializable:
+    # TODO: Mark the large files to have a longer TTL if it is being dumped.
+    return await self._Dump(self._context)
+
+  async def UserDump(self) -> JSONSerializable:
     """Same as Dump() but avoids information that is marked as internal-only, and dereferences large files."""
     # TODO: Add the ability to mark internal-only keys.
     # TODO: dereferences large files.
-    dumped = self._context.copy()
-    for k, v in dumped.items():
-      if isinstance(v, _LargeFileReference):
-        dumped[k] = v.file_uri
-    return dumped
+    return await self._Dump(self._context)
 
   def Fork(self) -> '_ErrorContext':
     copy_cxt = _ErrorContext(
@@ -168,6 +184,6 @@ class _ErrorContext:
         return None
 
       logger.exception(f'Error in error context: {exc_type}',
-                       extra={'error_context': self.Dump()})
+                       extra={'error_context': await self.Dump()})
       return None
     return None

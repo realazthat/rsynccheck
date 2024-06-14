@@ -452,12 +452,12 @@ async def _HashChunk(*, dd_cmd: str, hash_shell_str: str, directory: anyio.Path,
   if not await directory.exists():
     raise _FileNotFoundError(
         f'Directory not found: {directory}'
-        f'\n  context:\n{textwrap.indent(_YamlDump(err_ctx.UserDump()), "    ")}'
+        f'\n  context:\n{textwrap.indent(_YamlDump(await err_ctx.Dump()), "    ")}'
     )
   if not await path.exists():
     raise _FileNotFoundError(
         f'File not found: {path}'
-        f'\n  context:\n{textwrap.indent(_YamlDump(err_ctx.UserDump()), "    ")}'
+        f'\n  context:\n{textwrap.indent(_YamlDump(await err_ctx.Dump()), "    ")}'
     )
   file_size = await _FileSize(path=path)
   await err_ctx.Add('file_size', file_size)
@@ -466,7 +466,7 @@ async def _HashChunk(*, dd_cmd: str, hash_shell_str: str, directory: anyio.Path,
   if chunk_idx >= file_chunks:
     raise _ChunkNotFoundError(
         f'Chunk index {chunk_idx} is greater than the number of chunks in file'
-        f'\n  context:\n{textwrap.indent(_YamlDump(err_ctx.UserDump()), "    ")}'
+        f'\n  context:\n{textwrap.indent(_YamlDump(await err_ctx.Dump()), "    ")}'
     )
   dd_invoc = [
       dd_cmd, f'if={path}', f'bs={chunk_size}', f'skip={chunk_idx}', 'count=1'
@@ -485,7 +485,7 @@ async def _HashChunk(*, dd_cmd: str, hash_shell_str: str, directory: anyio.Path,
       # finished copying.
       raise
     logger.exception(f'Failed to hash chunk: ({type(e).__name__}) {str(e)}',
-                     extra={'error_context': err_ctx.UserDump()})
+                     extra={'error_context': await err_ctx.Dump()})
     raise
   await err_ctx.Add('output', output)
 
@@ -495,7 +495,7 @@ async def _HashChunk(*, dd_cmd: str, hash_shell_str: str, directory: anyio.Path,
   if len(hash_str) == 0:
     raise _HashParseError(
         f'Hash output is empty: {json.dumps(output)}'
-        f'\n  context:\n{textwrap.indent(_YamlDump(err_ctx.UserDump()), "    ")}'
+        f'\n  context:\n{textwrap.indent(_YamlDump(await err_ctx.Dump()), "    ")}'
     )
   valid_hex_chars = '0123456789abcdefABCDEF'
   valid_b64_chars = string.ascii_letters + string.digits + '+/='
@@ -507,7 +507,7 @@ async def _HashChunk(*, dd_cmd: str, hash_shell_str: str, directory: anyio.Path,
   if len(bad_chars) > 0:
     raise _HashParseError(
         f'Hash output contains invalid characters.'
-        f'\n  context:\n{textwrap.indent(_YamlDump(err_ctx.UserDump()), "    ")}'
+        f'\n  context:\n{textwrap.indent(_YamlDump(await err_ctx.Dump()), "    ")}'
     )
   return hash_str
 
@@ -670,7 +670,7 @@ async def _HashGroups(
         # Only log something if it's not a copy error, because copy errors are
         # normal.
         logger.exception(f'Failed to hash chunk: ({type(e).__name__}) {str(e)}',
-                         extra={'error_context': err_ctx.UserDump()})
+                         extra={'error_context': await err_ctx.Dump()})
       for chunk_idx in req_group.chunk_idx:
         progress.results.append(
             _ChunkStatus(
@@ -1056,9 +1056,9 @@ async def AuditMain(*, dd_cmd: str, hash_shell_str: str, directory: anyio.Path,
   if hashes_match != finished_with_no_errors:
     logger.error(
         'Internal error: Somehow, the audit passed in one way but not the other',
-        extra={'error_context': err_ctx.UserDump()})
+        extra={'error_context': await err_ctx.Dump()})
     console.print('error_context:', style='bold red')
-    console.print(textwrap.indent(_YamlDump(err_ctx.UserDump()), '  '),
+    console.print(textwrap.indent(_YamlDump(await err_ctx.Dump()), '  '),
                   style='bold red')
     raise AssertionError(
         'Internal error: Somehow, the audit passed in one way but not the other:'
