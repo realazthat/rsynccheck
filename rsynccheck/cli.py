@@ -272,7 +272,10 @@ async def amain():
 
     cmd = parser.add_subparsers(required=True, dest='cmd')
     ############################################################################
-    hash_cmd_parser = cmd.add_parser('hash', help='Hash files in a directory.')
+    hash_cmd_parser = cmd.add_parser('hash',
+                                     help='Hash files in a directory.',
+                                     description='Hash files in a directory.',
+                                     formatter_class=_CustomRichHelpFormatter)
     _AddDirectoryArgs(hash_cmd_parser, action='hash')
     hash_cmd_parser.add_argument(
         '--file-iter-method',
@@ -302,8 +305,10 @@ async def amain():
     audit_cmd_parser = cmd.add_parser(
         'audit',
         help=
-        'Audit files in a directory using an existing audit file produced by `hash` command.'
-    )
+        'Audit files in a directory using an existing audit file produced by `hash` command.',
+        description=
+        'Audit files in a directory using an existing audit file produced by `hash` command.',
+        formatter_class=_CustomRichHelpFormatter)
     _AddDirectoryArgs(audit_cmd_parser, action='audit')
     audit_cmd_parser.add_argument(
         '--audit-file',
