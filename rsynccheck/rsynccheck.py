@@ -10,7 +10,6 @@ import enum
 import io
 import json
 import logging
-import pathlib
 import shlex
 import string
 import sys
@@ -24,7 +23,7 @@ from concurrent.futures import (FIRST_COMPLETED, Future, ThreadPoolExecutor,
 from dataclasses import dataclass
 from pathlib import PurePosixPath
 from typing import (Any, AsyncGenerator, Dict, List, NamedTuple, Optional,
-                    Sequence, Set, TextIO, Tuple, Union)
+                    Sequence, Set, Tuple, Union)
 
 import anyio
 import pathspec
@@ -87,6 +86,10 @@ class AuditFileSchema(BaseModel):
   meta_unused: UnusedMeta
 
 
+async def _GetPath(path: anyio.Path) -> anyio.Path:
+  return await path.expanduser()
+
+
 def _Ignore(*, rel_path: PurePosixPath,
             ignores: List[pathspec.PathSpec]) -> bool:
   return any(ignore.match_file(str(rel_path)) for ignore in ignores)
@@ -100,7 +103,7 @@ class _ExecuteError(Exception):
       *,
       cmd: Union[List[str], str],
       cmd_str: str,
-      cwd: pathlib.Path,
+      cwd: anyio.Path,
       returncode: Optional[int],
   ):
     self.cmd = cmd
@@ -149,12 +152,12 @@ async def _Execute(*,
     raise _ExecuteError(_ErrorMsg(e),
                         cmd=cmd,
                         cmd_str=cmd_str,
-                        cwd=pathlib.Path(cwd),
+                        cwd=cwd,
                         returncode=process.returncode) from e
   raise _ExecuteError(_ErrorMsg(e=None),
                       cmd=cmd,
                       cmd_str=cmd_str,
-                      cwd=pathlib.Path(cwd),
+                      cwd=cwd,
                       returncode=process.returncode)
 
 
@@ -723,50 +726,49 @@ def _CheckFailFailures(*, failures: List[_GeneralFailure], console: Console):
   sys.exit(1)
 
 
-def _FindIgnoreFileSync(*, special_ignorefile_name: str,
-                        cwd: pathlib.Path) -> Optional[pathlib.Path]:
+async def _FindIgnoreFile(*, special_ignorefile_name: str,
+                          directory: anyio.Path) -> Optional[anyio.Path]:
   """
-  Search for a '.rsynccheck-ignore' file in the current working directory and its ancestors.
+  Search for a '.rsynccheckignore' file in the current working directory and its ancestors.
 
   Returns:
-      Optional[Path]: The path to the found '.rsynccheck-ignore' file, or None
+      Optional[Path]: The path to the found '.rsynccheckignore' file, or None
         if not found.
   """
-  ignorefile = cwd / special_ignorefile_name
-  if ignorefile.exists() and ignorefile.is_file():
+  if special_ignorefile_name == '':
+    return None
+  ignorefile = directory / special_ignorefile_name
+  if await ignorefile.exists() and await ignorefile.is_file():
     return ignorefile
   return None
 
 
-def _ConstructIgnorePathSpecsSync(*, special_ignorefile_name: Optional[str],
-                                  ignorefiles: List[TextIO],
-                                  ignorelines: List[str],
-                                  ignore_metas: Dict[str, List[str]],
-                                  cwd: pathlib.Path) -> List[pathspec.PathSpec]:
+async def _ConstructIgnorePathSpecs(
+    *, special_ignorefile_name: str, ignorefiles: List[anyio.Path],
+    ignorelines: List[str], ignore_metas: Dict[str, List[str]],
+    directory: anyio.Path) -> List[pathspec.PathSpec]:
 
-  found_ignore_file: Optional[TextIO] = None
-  try:
-    if special_ignorefile_name is not None:
-      found_ignore_file_path: Optional[pathlib.Path] = _FindIgnoreFileSync(
-          special_ignorefile_name=special_ignorefile_name, cwd=cwd)
-      if found_ignore_file_path is not None:
-        found_ignore_file = found_ignore_file_path.open('r')
-        ignorefiles.append(found_ignore_file)
+  # First, find the special ignore file (e.g '.rsynccheckignore')
+  if special_ignorefile_name is not None:
+    found_ignore_file_path: Optional[anyio.Path] = await _FindIgnoreFile(
+        special_ignorefile_name=special_ignorefile_name, directory=directory)
+    if found_ignore_file_path is not None:
+      ignorefiles.append(found_ignore_file_path)
 
-    ignores = []
-    ignorefile: TextIO
-    for ignorefile in ignorefiles:
-      ignorefile_contents = ignorefile.read()
-      ignorefile_lines: List[str] = ignorefile_contents.splitlines()
-      ignore_metas[ignorefile.name] = ignorefile_lines
-      ignores.append(
-          pathspec.PathSpec.from_lines('gitwildmatch', ignorefile_lines))
-    ignore_metas['~ignorelines'] = ignorelines
-    ignores.append(pathspec.PathSpec.from_lines('gitwildmatch', ignorelines))
-    return ignores
-  finally:
-    if found_ignore_file is not None:
-      found_ignore_file.close()
+  # Collect the PathSpec results.
+  ignores: List[pathspec.PathSpec] = []
+  ignorefile: anyio.Path
+  for ignorefile in ignorefiles:
+    ignorefile_contents = await ignorefile.read_text()
+    ignorefile_lines: List[str] = ignorefile_contents.splitlines()
+    ignore_metas[ignorefile.name] = ignorefile_lines
+    ignores.append(
+        pathspec.PathSpec.from_lines('gitwildmatch', ignorefile_lines))
+  # Now process ignorelines.
+  ignore_metas['~ignorelines'] = ignorelines
+  ignores.append(pathspec.PathSpec.from_lines('gitwildmatch', ignorelines))
+
+  return ignores
 
 
 class HashResults(NamedTuple):
@@ -872,12 +874,35 @@ async def Hash(dd_cmd: str, hash_shell_str: str, directory: anyio.Path,
 
 async def HashMain(*, dd_cmd: str, hash_shell_str: str, directory: anyio.Path,
                    file_iter_method: _FileIterMethodLiteral,
-                   audit_file_ostream: anyio.AsyncFile[str],
-                   ignores: List[pathspec.PathSpec],
-                   ignore_metas: Dict[str, List[str]], chunk_size: int,
+                   special_ignorefile_name: str, ignorefiles: List[str],
+                   ignorelines: List[str], audit_file: str, chunk_size: int,
                    group_size: int, max_workers: int, console: Console,
                    show_progress: Optional[_FormatLiteral],
                    err_ctx: _ErrorContext):
+  """
+  dd_cmd: str: Command to split chunks with.
+  hash_shell_str: str: Shell command to hash a chunk. Example: 'xxhash -H0'.
+  directory: Path: Directory to hash.
+  file_iter_method: str: How to find files to hash. Options: 'auto', 'iterdir', 'git'.
+  special_ignorefile_name: str: Name of the special ignore file. Example: '.rsynccheckignore'.
+  ignorefiles: List[str]: List of ignore files.
+  ignorelines: List[str]: List of ignore lines.
+  audit_file: str: Path to the audit file.
+  chunk_size: int: Size of the chunks to hash.
+  group_size: int: Size of the groups to hash.
+  max_workers: int: Maximum number of workers.
+  console: Console: Rich console.
+  show_progress: Optional[str]: How to show progress. Options: 'yaml', 'json',
+    'json-compact', 'table', 'fraction', 'percent', 'none'.
+  err_ctx: _ErrorContext: Error context.
+  """
+  ignore_metas: Dict[str, List[str]] = {}
+  ignores: List[pathspec.PathSpec] = await _ConstructIgnorePathSpecs(
+      special_ignorefile_name=special_ignorefile_name,
+      ignorefiles=list(map(anyio.Path, ignorefiles)),
+      ignorelines=ignorelines,
+      ignore_metas=ignore_metas,
+      directory=directory)
 
   paths: _PathList = await _GetPaths(directory=directory,
                                      file_iter_method=file_iter_method,
@@ -932,17 +957,48 @@ async def HashMain(*, dd_cmd: str, hash_shell_str: str, directory: anyio.Path,
   yaml.safe_dump(audit.model_dump(mode='json', round_trip=True),
                  ostream,
                  sort_keys=False)
-  await audit_file_ostream.write(ostream.getvalue())
+  audit_yaml_str = ostream.getvalue()
+  if audit_file == '-':
+    async with anyio.wrap_file(sys.stdout) as audit_file_ostream:
+      await audit_file_ostream.write(audit_yaml_str)
+  else:
+    audit_file_path = await _GetPath(anyio.Path(audit_file))
+    async with await anyio.open_file(audit_file_path,
+                                     'w') as audit_file_ostream:
+      await audit_file_ostream.write(audit_yaml_str)
   ##############################################################################
   console.print('Hashing complete', style='bold green')
 
 
 async def AuditMain(*, dd_cmd: str, hash_shell_str: str, directory: anyio.Path,
-                    audit_yaml_str: str,
-                    show_progress: Optional[_FormatLiteral],
+                    audit_file: str, show_progress: Optional[_FormatLiteral],
                     output_format: _FormatLiteral, mismatch_exit: int,
                     group_size: int, max_workers: int, console: Console,
                     err_ctx: _ErrorContext):
+  """
+  dd_cmd: str: Command to split chunks with.
+  hash_shell_str: str: Shell command to hash a chunk. Example: 'xxhash -H0'.
+  directory: Path: Directory to hash.
+  audit_file: str: Path to the audit file.
+  show_progress: Optional[str]: How to show progress. Options: 'yaml', 'json',
+    'json-compact', 'table', 'fraction', 'percent', 'none'.
+  output_format: str: How to output the results. Options: 'yaml', 'json',
+    'json-compact', 'table', 'fraction', 'percent', 'none'.
+  mismatch_exit: int: Exit code if there are mismatches.
+  group_size: int: Size of the groups to hash.
+  max_workers: int: Maximum number of workers.
+  console: Console: Rich console.
+  err_ctx: _ErrorContext: Error context.
+  """
+  audit_yaml_str: str
+  if audit_file == '-':
+    async with anyio.wrap_file(sys.stdin) as audit_file_istream:
+      audit_yaml_str = await audit_file_istream.read()
+  else:
+    audit_file_path = await _GetPath(anyio.Path(audit_file))
+    async with await anyio.open_file(audit_file_path,
+                                     'r') as audit_file_istream:
+      audit_yaml_str = await audit_file_istream.read()
   audit_dict: Dict[str, Any] = yaml.safe_load(audit_yaml_str)
   audit: AuditFileSchema = AuditFileSchema.model_validate(audit_dict)
   await err_ctx.Add('audit', await err_ctx.LargeToFile('audit', audit_yaml_str))

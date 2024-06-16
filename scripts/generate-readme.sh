@@ -24,7 +24,7 @@ export SUPPRESS_TERMINAL_WARNING=1
 
 mkdir -p .deleteme
 # Try to make terminal output as consistent as possible.
-TERM=xterm-256color COLUMNS=80 LINES=40 \
+TERM=xterm-256color COLUMNS=160 LINES=40 \
 unbuffer bash ./rsynccheck/examples/hash-audit_example.sh \
   > .deleteme/hash-audit_example.output 2>&1
 

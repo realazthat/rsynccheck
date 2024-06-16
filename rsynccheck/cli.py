@@ -12,21 +12,18 @@ import logging
 import os
 import pathlib
 import sys
-from contextlib import asynccontextmanager
-from pathlib import Path
 from shutil import get_terminal_size
-from typing import AsyncIterator, List, NamedTuple, Optional
+from typing import List, NamedTuple, Optional
 
 import anyio
-import humanize
+import humanfriendly
 from rich.console import Console
 from rich_argparse import RichHelpFormatter
-from typing_extensions import Dict
 
 from . import _build_version
 from .rsynccheck import (_VALID_FILE_ITER_METHODS, _VALID_FORMATS, AuditMain,
-                         HashMain, _ConstructIgnorePathSpecsSync,
-                         _FileIterMethodLiteral, _FormatLiteral)
+                         HashMain, _FileIterMethodLiteral, _FormatLiteral,
+                         _GetPath)
 from .utilities.error_utils import _ErrorContext
 
 logger = logging.getLogger(__name__)
@@ -34,9 +31,18 @@ logger = logging.getLogger(__name__)
 _DEFAULT_LOGS_ARTIFACTS_PATH = pathlib.Path('~/.rsynccheck/logs/artifacts')
 _DEFAULT_FILE_ITER_METHOD: _FileIterMethodLiteral = 'iterdir'
 _DEFAULT_HASH_SHELL_STR = 'xxhsum -H0'
-_DEFAULT_CHUNK_SIZE = 4096 * 1024
+# ChatGPT says that the maximum page size for SSD is 128KB, and the maximum
+# track size for HDD is 256KB. It shouldn't hurt to be conservative here.
+#
+# TODO: We should compute the optimal chunk size based on disk. ChatGPT says
+# fio is a good tool for this. Or we can test it using rsynccheck itself.
+_DEFAULT_CHUNK_SIZE = '256KiB'
+# TODO: We should compute the optimal group size based on the chunk size and
+# the size of the files in the directory. Or we can test it using rsynccheck
+# itself.
 _DEFAULT_GROUP_SIZE = 10
-_DEFAULT_MAX_WORKERS = 10
+# Use 0 to use the number of CPUs.
+_DEFAULT_MAX_WORKERS = 0
 _DEFAULT_MISMATCH_EXIT = 1
 
 
@@ -45,7 +51,7 @@ def _GetProgramName() -> str:
     # Use __package__ to get the base package name
     base_module_path = __package__
     # Infer the module name from the file path, with assumptions about the structure
-    module_name = Path(__file__).stem
+    module_name = pathlib.Path(__file__).stem
     # Construct what might be the intended full module path
     full_module_path = f'{base_module_path}.{module_name}' if base_module_path else module_name
     return f'python -m {full_module_path}'
@@ -55,7 +61,7 @@ def _GetProgramName() -> str:
 
 def _AddIgnoreArgs(parser: argparse.ArgumentParser):
   parser.add_argument('--ignorefile',
-                      type=argparse.FileType('r'),
+                      type=str,
                       action='append',
                       default=[],
                       help='File containing additional ignore patterns.'
@@ -71,12 +77,13 @@ def _AddIgnoreArgs(parser: argparse.ArgumentParser):
                       ' See <https://github.com/cpburnz/python-pathspec>.'
                       ' Can be used more than once.')
   parser.add_argument(
-      '--special-ignorefile',
+      '--special-ignorefile-name',
       type=str,
       default='.rsynccheckignore',
       help=
-      'Searches for this file in the root of the directory and treats it like an --ignorefile.'
-  )
+      'Special ignorefile name. Searches for this file name in the root of the'
+      ' target directory and treats it like an --ignorefile.'
+      ' Default is ".rsynccheckignore". Set to "" to disable.')
 
 
 def _AddDirectoryArgs(parser: argparse.ArgumentParser, *, action: str):
@@ -119,7 +126,7 @@ def _AddHashingArgs(parser: argparse.ArgumentParser):
   parser.add_argument('--dd-cmd',
                       type=str,
                       default='dd',
-                      help='Command to copy files with. Default is "dd".')
+                      help='Command to split chunks with. Default is "dd".')
 
 
 class _CustomRichHelpFormatter(RichHelpFormatter):
@@ -147,104 +154,70 @@ def _GetMaxWorkers(max_workers: int) -> int:
   return max_workers
 
 
-async def _GetPath(path: anyio.Path) -> anyio.Path:
-  expanded: anyio.Path = await path.expanduser()
-  resolved: anyio.Path = await expanded.resolve()
-  return resolved
-
-
-@asynccontextmanager
-async def _OpenFileOrStdout(
-    path_str: str) -> AsyncIterator[anyio.AsyncFile[str]]:
-  if path_str == '-':
-    async with anyio.wrap_file(sys.stdout) as wrapped_stdout:
-      yield wrapped_stdout
-  else:
-    path: anyio.Path = await _GetPath(anyio.Path(path_str))
-    if not await path.parent.exists():
-      await path.parent.mkdir(parents=True, exist_ok=True)
-    async with await anyio.open_file(path, 'w') as file:
-      yield file
-
-
-@asynccontextmanager
-async def _OpenFileOrStdin(
-    path_str: str) -> AsyncIterator[anyio.AsyncFile[str]]:
-  if path_str == '-':
-    async with anyio.wrap_file(sys.stdin) as wrapped_stdin:
-      yield wrapped_stdin
-  else:
-    path: anyio.Path = await _GetPath(anyio.Path(path_str))
-    async with await anyio.open_file(path, 'r') as file:
-      yield file
-
-
-class HashingArgs(NamedTuple):
+class HashingParams(NamedTuple):
   dd_cmd: str
   hash_shell_str: str
   group_size: int
   max_workers: int
 
 
-def _GetHashingArgs(args: argparse.Namespace) -> HashingArgs:
+def _GetHashingParams(args: argparse.Namespace) -> HashingParams:
 
-  return HashingArgs(dd_cmd=args.dd_cmd,
-                     hash_shell_str=args.hash_shell_str,
-                     max_workers=_GetMaxWorkers(args.max_workers),
-                     group_size=args.group_size)
+  return HashingParams(dd_cmd=args.dd_cmd,
+                       hash_shell_str=args.hash_shell_str,
+                       max_workers=_GetMaxWorkers(args.max_workers),
+                       group_size=args.group_size)
 
 
 async def _HashMainFromArgs(args: argparse.Namespace, console: Console):
-  hashing_args = _GetHashingArgs(args)
-  ignore_metas: Dict[str, List[str]] = {}
-  ignores = _ConstructIgnorePathSpecsSync(
-      special_ignorefile_name=args.special_ignorefile,
-      ignorefiles=list(args.ignorefile),
-      ignorelines=list(args.ignoreline),
-      ignore_metas=ignore_metas,
-      cwd=args.directory)
+  hashing_params = _GetHashingParams(args)
+  directory: anyio.Path = await _GetPath(anyio.Path(args.directory))
   file_iter_method: _FileIterMethodLiteral = args.file_iter_method
+  special_ignorefile_name: str = args.special_ignorefile_name
+  ignorefiles: List[str] = list(args.ignorefile)
+  ignorelines: List[str] = list(args.ignoreline)
   chunk_size: int = args.chunk_size
   show_progress: Optional[_FormatLiteral] = args.progress
-  logs_artifacts_path = await _GetPath(anyio.Path(args.logs_artifacts_path))
+  logs_artifacts_path: anyio.Path = await _GetPath(
+      anyio.Path(args.logs_artifacts_path))
+  logs_artifacts_path = await logs_artifacts_path.resolve()
+  audit_file: str = args.audit_file
 
   err_ctx = await _ErrorContext.Create(logs_artifacts_path=logs_artifacts_path,
                                        key='hash')
-
-  async with err_ctx, \
-        _OpenFileOrStdout(str(args.audit_file)) as audit_file_ostream:
-    return await HashMain(dd_cmd=hashing_args.dd_cmd,
-                          hash_shell_str=hashing_args.hash_shell_str,
-                          directory=await _GetPath(anyio.Path(args.directory)),
+  async with err_ctx:
+    return await HashMain(dd_cmd=hashing_params.dd_cmd,
+                          hash_shell_str=hashing_params.hash_shell_str,
+                          directory=directory,
                           file_iter_method=file_iter_method,
-                          audit_file_ostream=audit_file_ostream,
-                          ignores=ignores,
-                          ignore_metas=ignore_metas,
+                          special_ignorefile_name=special_ignorefile_name,
+                          ignorefiles=ignorefiles,
+                          ignorelines=ignorelines,
+                          audit_file=audit_file,
                           chunk_size=chunk_size,
-                          group_size=hashing_args.group_size,
-                          max_workers=hashing_args.max_workers,
+                          group_size=hashing_params.group_size,
+                          max_workers=hashing_params.max_workers,
                           show_progress=show_progress,
                           console=console,
                           err_ctx=err_ctx.StepInto())
 
 
 async def _AuditMainFromArgs(args: argparse.Namespace, console: Console):
-  hashing_args = _GetHashingArgs(args)
+  hashing_args = _GetHashingParams(args)
+  directory: anyio.Path = await _GetPath(anyio.Path(args.directory))
   show_progress: Optional[_FormatLiteral] = args.progress
   output_format: _FormatLiteral = args.output_format
   mismatch_exit: int = args.mismatch_exit
   logs_artifacts_path = await _GetPath(anyio.Path(args.logs_artifacts_path))
+  audit_file: str = args.audit_file
 
   err_ctx = await _ErrorContext.Create(logs_artifacts_path=logs_artifacts_path,
                                        key='audit')
-  async with err_ctx, _OpenFileOrStdin(args.audit_file) as audit_file_istream:
-
-    audit_yaml_str: str = await audit_file_istream.read()
-
+  async with err_ctx:
     return await AuditMain(dd_cmd=hashing_args.dd_cmd,
                            hash_shell_str=hashing_args.hash_shell_str,
-                           directory=await _GetPath(anyio.Path(args.directory)),
-                           audit_yaml_str=audit_yaml_str,
+                           directory=directory,
+                           audit_file=audit_file,
                            group_size=hashing_args.group_size,
                            max_workers=_GetMaxWorkers(args.max_workers),
                            show_progress=show_progress,
@@ -288,11 +261,13 @@ async def amain():
         f' Default is {_DEFAULT_FILE_ITER_METHOD}.')
     hash_cmd_parser.add_argument(
         '--chunk-size',
-        type=int,
-        default=_DEFAULT_CHUNK_SIZE,
-        help=
-        f'Chunk size to use when hashing files. Default is {humanize.naturalsize(_DEFAULT_CHUNK_SIZE)}.'
-    )
+        type=humanfriendly.parse_size,
+        default=humanfriendly.parse_size(_DEFAULT_CHUNK_SIZE),
+        help=f'Chunk size (in bytes) to use when hashing files.'
+        ' Supports sizes in human-readable format.'
+        ' See https://pypi.org/project/humanfriendly/ for supported formats.'
+        f' Default is {json.dumps(_DEFAULT_CHUNK_SIZE)}.')
+
     hash_cmd_parser.add_argument(
         '--audit-file',
         type=str,

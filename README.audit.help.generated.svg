@@ -19,245 +19,245 @@ url(&quot;https://cdnjs.cloudflare.com/ajax/libs/firacode/6.2.0/woff/FiraCode-Bo
 font-style: bold;
 font-weight: 700;
 }
-.terminal-2188934924-matrix {
+.terminal-2505080773-matrix {
 font-family: Fira Code, monospace;
 font-size: 20px;
 line-height: 24.4px;
 font-variant-east-asian: full-width;
 }
-.terminal-2188934924-title {
+.terminal-2505080773-title {
 font-size: 18px;
 font-weight: bold;
 font-family: arial;
 }
-.terminal-2188934924-r1 { fill: #d9d9d9 }
-.terminal-2188934924-r2 { fill: #ff8700 }
-.terminal-2188934924-r3 { fill: #808080 }
-.terminal-2188934924-r4 { fill: #58d1eb }
-.terminal-2188934924-r5 { fill: #00af87 }
-.terminal-2188934924-r6 { fill: #d9d9d9;font-weight: bold }
+.terminal-2505080773-r1 { fill: #d9d9d9 }
+.terminal-2505080773-r2 { fill: #ff8700 }
+.terminal-2505080773-r3 { fill: #808080 }
+.terminal-2505080773-r4 { fill: #58d1eb }
+.terminal-2505080773-r5 { fill: #00af87 }
+.terminal-2505080773-r6 { fill: #d9d9d9;font-weight: bold }
 </style>
 <defs>
-<clipPath id="terminal-2188934924-clip-terminal">
+<clipPath id="terminal-2505080773-clip-terminal">
 <rect x="0" y="0" width="1951.0" height="706.5999999999999"/>
 </clipPath>
-<clipPath id="terminal-2188934924-line-0">
+<clipPath id="terminal-2505080773-line-0">
 <rect x="0" y="1.5" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-2188934924-line-1">
+<clipPath id="terminal-2505080773-line-1">
 <rect x="0" y="25.9" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-2188934924-line-2">
+<clipPath id="terminal-2505080773-line-2">
 <rect x="0" y="50.3" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-2188934924-line-3">
+<clipPath id="terminal-2505080773-line-3">
 <rect x="0" y="74.7" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-2188934924-line-4">
+<clipPath id="terminal-2505080773-line-4">
 <rect x="0" y="99.1" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-2188934924-line-5">
+<clipPath id="terminal-2505080773-line-5">
 <rect x="0" y="123.5" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-2188934924-line-6">
+<clipPath id="terminal-2505080773-line-6">
 <rect x="0" y="147.9" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-2188934924-line-7">
+<clipPath id="terminal-2505080773-line-7">
 <rect x="0" y="172.3" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-2188934924-line-8">
+<clipPath id="terminal-2505080773-line-8">
 <rect x="0" y="196.7" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-2188934924-line-9">
+<clipPath id="terminal-2505080773-line-9">
 <rect x="0" y="221.1" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-2188934924-line-10">
+<clipPath id="terminal-2505080773-line-10">
 <rect x="0" y="245.5" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-2188934924-line-11">
+<clipPath id="terminal-2505080773-line-11">
 <rect x="0" y="269.9" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-2188934924-line-12">
+<clipPath id="terminal-2505080773-line-12">
 <rect x="0" y="294.3" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-2188934924-line-13">
+<clipPath id="terminal-2505080773-line-13">
 <rect x="0" y="318.7" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-2188934924-line-14">
+<clipPath id="terminal-2505080773-line-14">
 <rect x="0" y="343.1" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-2188934924-line-15">
+<clipPath id="terminal-2505080773-line-15">
 <rect x="0" y="367.5" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-2188934924-line-16">
+<clipPath id="terminal-2505080773-line-16">
 <rect x="0" y="391.9" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-2188934924-line-17">
+<clipPath id="terminal-2505080773-line-17">
 <rect x="0" y="416.3" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-2188934924-line-18">
+<clipPath id="terminal-2505080773-line-18">
 <rect x="0" y="440.7" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-2188934924-line-19">
+<clipPath id="terminal-2505080773-line-19">
 <rect x="0" y="465.1" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-2188934924-line-20">
+<clipPath id="terminal-2505080773-line-20">
 <rect x="0" y="489.5" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-2188934924-line-21">
+<clipPath id="terminal-2505080773-line-21">
 <rect x="0" y="513.9" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-2188934924-line-22">
+<clipPath id="terminal-2505080773-line-22">
 <rect x="0" y="538.3" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-2188934924-line-23">
+<clipPath id="terminal-2505080773-line-23">
 <rect x="0" y="562.7" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-2188934924-line-24">
+<clipPath id="terminal-2505080773-line-24">
 <rect x="0" y="587.1" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-2188934924-line-25">
+<clipPath id="terminal-2505080773-line-25">
 <rect x="0" y="611.5" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-2188934924-line-26">
+<clipPath id="terminal-2505080773-line-26">
 <rect x="0" y="635.9" width="1952" height="24.65"/>
 </clipPath>
-<clipPath id="terminal-2188934924-line-27">
+<clipPath id="terminal-2505080773-line-27">
 <rect x="0" y="660.3" width="1952" height="24.65"/>
 </clipPath>
 </defs>
 <g transform="translate(9, 0)">
-<g class="terminal-2188934924-matrix">
-<text class="terminal-2188934924-r1" x="0" y="20" textLength="475.8" clip-path="url(#terminal-2188934924-line-0)">$ python -m rsynccheck.cli audit --help</text>
-<text class="terminal-2188934924-r1" x="1952" y="20" textLength="12.2" clip-path="url(#terminal-2188934924-line-0)">
+<g class="terminal-2505080773-matrix">
+<text class="terminal-2505080773-r1" x="0" y="20" textLength="475.8" clip-path="url(#terminal-2505080773-line-0)">$ python -m rsynccheck.cli audit --help</text>
+<text class="terminal-2505080773-r1" x="1952" y="20" textLength="12.2" clip-path="url(#terminal-2505080773-line-0)">
 </text>
-<text class="terminal-2188934924-r2" x="0" y="44.4" textLength="73.2" clip-path="url(#terminal-2188934924-line-1)">Usage:</text>
-<text class="terminal-2188934924-r3" x="85.4" y="44.4" textLength="366" clip-path="url(#terminal-2188934924-line-1)">python -m rsynccheck.cli audit</text>
-<text class="terminal-2188934924-r1" x="451.4" y="44.4" textLength="24.4" clip-path="url(#terminal-2188934924-line-1)"> [</text>
-<text class="terminal-2188934924-r4" x="475.8" y="44.4" textLength="24.4" clip-path="url(#terminal-2188934924-line-1)">-h</text>
-<text class="terminal-2188934924-r1" x="500.2" y="44.4" textLength="24.4" clip-path="url(#terminal-2188934924-line-1)">] </text>
-<text class="terminal-2188934924-r4" x="524.6" y="44.4" textLength="134.2" clip-path="url(#terminal-2188934924-line-1)">--directory</text>
-<text class="terminal-2188934924-r5" x="671" y="44.4" textLength="109.8" clip-path="url(#terminal-2188934924-line-1)">DIRECTORY</text>
-<text class="terminal-2188934924-r4" x="793" y="44.4" textLength="146.4" clip-path="url(#terminal-2188934924-line-1)">--audit-file</text>
-<text class="terminal-2188934924-r5" x="951.6" y="44.4" textLength="122" clip-path="url(#terminal-2188934924-line-1)">AUDIT_FILE</text>
-<text class="terminal-2188934924-r1" x="1952" y="44.4" textLength="12.2" clip-path="url(#terminal-2188934924-line-1)">
+<text class="terminal-2505080773-r2" x="0" y="44.4" textLength="73.2" clip-path="url(#terminal-2505080773-line-1)">Usage:</text>
+<text class="terminal-2505080773-r3" x="85.4" y="44.4" textLength="366" clip-path="url(#terminal-2505080773-line-1)">python -m rsynccheck.cli audit</text>
+<text class="terminal-2505080773-r1" x="451.4" y="44.4" textLength="24.4" clip-path="url(#terminal-2505080773-line-1)"> [</text>
+<text class="terminal-2505080773-r4" x="475.8" y="44.4" textLength="24.4" clip-path="url(#terminal-2505080773-line-1)">-h</text>
+<text class="terminal-2505080773-r1" x="500.2" y="44.4" textLength="24.4" clip-path="url(#terminal-2505080773-line-1)">] </text>
+<text class="terminal-2505080773-r4" x="524.6" y="44.4" textLength="134.2" clip-path="url(#terminal-2505080773-line-1)">--directory</text>
+<text class="terminal-2505080773-r5" x="671" y="44.4" textLength="109.8" clip-path="url(#terminal-2505080773-line-1)">DIRECTORY</text>
+<text class="terminal-2505080773-r4" x="793" y="44.4" textLength="146.4" clip-path="url(#terminal-2505080773-line-1)">--audit-file</text>
+<text class="terminal-2505080773-r5" x="951.6" y="44.4" textLength="122" clip-path="url(#terminal-2505080773-line-1)">AUDIT_FILE</text>
+<text class="terminal-2505080773-r1" x="1952" y="44.4" textLength="12.2" clip-path="url(#terminal-2505080773-line-1)">
 </text>
-<text class="terminal-2188934924-r1" x="0" y="68.8" textLength="475.8" clip-path="url(#terminal-2188934924-line-2)">                                      [</text>
-<text class="terminal-2188934924-r4" x="475.8" y="68.8" textLength="183" clip-path="url(#terminal-2188934924-line-2)">--output-format</text>
-<text class="terminal-2188934924-r5" x="671" y="68.8" textLength="768.6" clip-path="url(#terminal-2188934924-line-2)">{fraction,percent,json,json-compact,table,yaml,yaml-debug,none}</text>
-<text class="terminal-2188934924-r1" x="1439.6" y="68.8" textLength="36.6" clip-path="url(#terminal-2188934924-line-2)">] [</text>
-<text class="terminal-2188934924-r4" x="1476.2" y="68.8" textLength="183" clip-path="url(#terminal-2188934924-line-2)">--mismatch-exit</text>
-<text class="terminal-2188934924-r5" x="1671.4" y="68.8" textLength="158.6" clip-path="url(#terminal-2188934924-line-2)">MISMATCH_EXIT</text>
-<text class="terminal-2188934924-r1" x="1830" y="68.8" textLength="12.2" clip-path="url(#terminal-2188934924-line-2)">]</text>
-<text class="terminal-2188934924-r1" x="1952" y="68.8" textLength="12.2" clip-path="url(#terminal-2188934924-line-2)">
+<text class="terminal-2505080773-r1" x="0" y="68.8" textLength="475.8" clip-path="url(#terminal-2505080773-line-2)">                                      [</text>
+<text class="terminal-2505080773-r4" x="475.8" y="68.8" textLength="183" clip-path="url(#terminal-2505080773-line-2)">--output-format</text>
+<text class="terminal-2505080773-r5" x="671" y="68.8" textLength="768.6" clip-path="url(#terminal-2505080773-line-2)">{fraction,percent,json,json-compact,table,yaml,yaml-debug,none}</text>
+<text class="terminal-2505080773-r1" x="1439.6" y="68.8" textLength="36.6" clip-path="url(#terminal-2505080773-line-2)">] [</text>
+<text class="terminal-2505080773-r4" x="1476.2" y="68.8" textLength="183" clip-path="url(#terminal-2505080773-line-2)">--mismatch-exit</text>
+<text class="terminal-2505080773-r5" x="1671.4" y="68.8" textLength="158.6" clip-path="url(#terminal-2505080773-line-2)">MISMATCH_EXIT</text>
+<text class="terminal-2505080773-r1" x="1830" y="68.8" textLength="12.2" clip-path="url(#terminal-2505080773-line-2)">]</text>
+<text class="terminal-2505080773-r1" x="1952" y="68.8" textLength="12.2" clip-path="url(#terminal-2505080773-line-2)">
 </text>
-<text class="terminal-2188934924-r1" x="0" y="93.2" textLength="475.8" clip-path="url(#terminal-2188934924-line-3)">                                      [</text>
-<text class="terminal-2188934924-r4" x="475.8" y="93.2" textLength="122" clip-path="url(#terminal-2188934924-line-3)">--progress</text>
-<text class="terminal-2188934924-r5" x="610" y="93.2" textLength="768.6" clip-path="url(#terminal-2188934924-line-3)">{fraction,percent,json,json-compact,table,yaml,yaml-debug,none}</text>
-<text class="terminal-2188934924-r1" x="1378.6" y="93.2" textLength="36.6" clip-path="url(#terminal-2188934924-line-3)">] [</text>
-<text class="terminal-2188934924-r4" x="1415.2" y="93.2" textLength="146.4" clip-path="url(#terminal-2188934924-line-3)">--group-size</text>
-<text class="terminal-2188934924-r5" x="1573.8" y="93.2" textLength="122" clip-path="url(#terminal-2188934924-line-3)">GROUP_SIZE</text>
-<text class="terminal-2188934924-r1" x="1695.8" y="93.2" textLength="12.2" clip-path="url(#terminal-2188934924-line-3)">]</text>
-<text class="terminal-2188934924-r1" x="1952" y="93.2" textLength="12.2" clip-path="url(#terminal-2188934924-line-3)">
+<text class="terminal-2505080773-r1" x="0" y="93.2" textLength="475.8" clip-path="url(#terminal-2505080773-line-3)">                                      [</text>
+<text class="terminal-2505080773-r4" x="475.8" y="93.2" textLength="122" clip-path="url(#terminal-2505080773-line-3)">--progress</text>
+<text class="terminal-2505080773-r5" x="610" y="93.2" textLength="768.6" clip-path="url(#terminal-2505080773-line-3)">{fraction,percent,json,json-compact,table,yaml,yaml-debug,none}</text>
+<text class="terminal-2505080773-r1" x="1378.6" y="93.2" textLength="36.6" clip-path="url(#terminal-2505080773-line-3)">] [</text>
+<text class="terminal-2505080773-r4" x="1415.2" y="93.2" textLength="146.4" clip-path="url(#terminal-2505080773-line-3)">--group-size</text>
+<text class="terminal-2505080773-r5" x="1573.8" y="93.2" textLength="122" clip-path="url(#terminal-2505080773-line-3)">GROUP_SIZE</text>
+<text class="terminal-2505080773-r1" x="1695.8" y="93.2" textLength="12.2" clip-path="url(#terminal-2505080773-line-3)">]</text>
+<text class="terminal-2505080773-r1" x="1952" y="93.2" textLength="12.2" clip-path="url(#terminal-2505080773-line-3)">
 </text>
-<text class="terminal-2188934924-r1" x="0" y="117.6" textLength="475.8" clip-path="url(#terminal-2188934924-line-4)">                                      [</text>
-<text class="terminal-2188934924-r4" x="475.8" y="117.6" textLength="158.6" clip-path="url(#terminal-2188934924-line-4)">--max-workers</text>
-<text class="terminal-2188934924-r5" x="646.6" y="117.6" textLength="134.2" clip-path="url(#terminal-2188934924-line-4)">MAX_WORKERS</text>
-<text class="terminal-2188934924-r1" x="780.8" y="117.6" textLength="36.6" clip-path="url(#terminal-2188934924-line-4)">] [</text>
-<text class="terminal-2188934924-r4" x="817.4" y="117.6" textLength="195.2" clip-path="url(#terminal-2188934924-line-4)">--hash-shell-str</text>
-<text class="terminal-2188934924-r5" x="1024.8" y="117.6" textLength="170.8" clip-path="url(#terminal-2188934924-line-4)">HASH_SHELL_STR</text>
-<text class="terminal-2188934924-r1" x="1195.6" y="117.6" textLength="36.6" clip-path="url(#terminal-2188934924-line-4)">] [</text>
-<text class="terminal-2188934924-r4" x="1232.2" y="117.6" textLength="97.6" clip-path="url(#terminal-2188934924-line-4)">--dd-cmd</text>
-<text class="terminal-2188934924-r5" x="1342" y="117.6" textLength="73.2" clip-path="url(#terminal-2188934924-line-4)">DD_CMD</text>
-<text class="terminal-2188934924-r1" x="1415.2" y="117.6" textLength="12.2" clip-path="url(#terminal-2188934924-line-4)">]</text>
-<text class="terminal-2188934924-r1" x="1952" y="117.6" textLength="12.2" clip-path="url(#terminal-2188934924-line-4)">
+<text class="terminal-2505080773-r1" x="0" y="117.6" textLength="475.8" clip-path="url(#terminal-2505080773-line-4)">                                      [</text>
+<text class="terminal-2505080773-r4" x="475.8" y="117.6" textLength="158.6" clip-path="url(#terminal-2505080773-line-4)">--max-workers</text>
+<text class="terminal-2505080773-r5" x="646.6" y="117.6" textLength="134.2" clip-path="url(#terminal-2505080773-line-4)">MAX_WORKERS</text>
+<text class="terminal-2505080773-r1" x="780.8" y="117.6" textLength="36.6" clip-path="url(#terminal-2505080773-line-4)">] [</text>
+<text class="terminal-2505080773-r4" x="817.4" y="117.6" textLength="195.2" clip-path="url(#terminal-2505080773-line-4)">--hash-shell-str</text>
+<text class="terminal-2505080773-r5" x="1024.8" y="117.6" textLength="170.8" clip-path="url(#terminal-2505080773-line-4)">HASH_SHELL_STR</text>
+<text class="terminal-2505080773-r1" x="1195.6" y="117.6" textLength="36.6" clip-path="url(#terminal-2505080773-line-4)">] [</text>
+<text class="terminal-2505080773-r4" x="1232.2" y="117.6" textLength="97.6" clip-path="url(#terminal-2505080773-line-4)">--dd-cmd</text>
+<text class="terminal-2505080773-r5" x="1342" y="117.6" textLength="73.2" clip-path="url(#terminal-2505080773-line-4)">DD_CMD</text>
+<text class="terminal-2505080773-r1" x="1415.2" y="117.6" textLength="12.2" clip-path="url(#terminal-2505080773-line-4)">]</text>
+<text class="terminal-2505080773-r1" x="1952" y="117.6" textLength="12.2" clip-path="url(#terminal-2505080773-line-4)">
 </text>
-<text class="terminal-2188934924-r1" x="1952" y="142" textLength="12.2" clip-path="url(#terminal-2188934924-line-5)">
+<text class="terminal-2505080773-r1" x="1952" y="142" textLength="12.2" clip-path="url(#terminal-2505080773-line-5)">
 </text>
-<text class="terminal-2188934924-r1" x="0" y="166.4" textLength="841.8" clip-path="url(#terminal-2188934924-line-6)">Audit files in a directory using an existing audit file produced by `</text>
-<text class="terminal-2188934924-r6" x="841.8" y="166.4" textLength="48.8" clip-path="url(#terminal-2188934924-line-6)">hash</text>
-<text class="terminal-2188934924-r1" x="890.6" y="166.4" textLength="122" clip-path="url(#terminal-2188934924-line-6)">` command.</text>
-<text class="terminal-2188934924-r1" x="1952" y="166.4" textLength="12.2" clip-path="url(#terminal-2188934924-line-6)">
+<text class="terminal-2505080773-r1" x="0" y="166.4" textLength="841.8" clip-path="url(#terminal-2505080773-line-6)">Audit files in a directory using an existing audit file produced by `</text>
+<text class="terminal-2505080773-r6" x="841.8" y="166.4" textLength="48.8" clip-path="url(#terminal-2505080773-line-6)">hash</text>
+<text class="terminal-2505080773-r1" x="890.6" y="166.4" textLength="122" clip-path="url(#terminal-2505080773-line-6)">` command.</text>
+<text class="terminal-2505080773-r1" x="1952" y="166.4" textLength="12.2" clip-path="url(#terminal-2505080773-line-6)">
 </text>
-<text class="terminal-2188934924-r1" x="1952" y="190.8" textLength="12.2" clip-path="url(#terminal-2188934924-line-7)">
+<text class="terminal-2505080773-r1" x="1952" y="190.8" textLength="12.2" clip-path="url(#terminal-2505080773-line-7)">
 </text>
-<text class="terminal-2188934924-r2" x="0" y="215.2" textLength="231.8" clip-path="url(#terminal-2188934924-line-8)">Optional Arguments:</text>
-<text class="terminal-2188934924-r1" x="1952" y="215.2" textLength="12.2" clip-path="url(#terminal-2188934924-line-8)">
+<text class="terminal-2505080773-r2" x="0" y="215.2" textLength="231.8" clip-path="url(#terminal-2505080773-line-8)">Optional Arguments:</text>
+<text class="terminal-2505080773-r1" x="1952" y="215.2" textLength="12.2" clip-path="url(#terminal-2505080773-line-8)">
 </text>
-<text class="terminal-2188934924-r4" x="24.4" y="239.6" textLength="24.4" clip-path="url(#terminal-2188934924-line-9)">-h</text>
-<text class="terminal-2188934924-r1" x="48.8" y="239.6" textLength="24.4" clip-path="url(#terminal-2188934924-line-9)">, </text>
-<text class="terminal-2188934924-r4" x="73.2" y="239.6" textLength="73.2" clip-path="url(#terminal-2188934924-line-9)">--help</text>
-<text class="terminal-2188934924-r1" x="292.8" y="239.6" textLength="378.2" clip-path="url(#terminal-2188934924-line-9)">show this help message and exit</text>
-<text class="terminal-2188934924-r1" x="1952" y="239.6" textLength="12.2" clip-path="url(#terminal-2188934924-line-9)">
+<text class="terminal-2505080773-r4" x="24.4" y="239.6" textLength="24.4" clip-path="url(#terminal-2505080773-line-9)">-h</text>
+<text class="terminal-2505080773-r1" x="48.8" y="239.6" textLength="24.4" clip-path="url(#terminal-2505080773-line-9)">, </text>
+<text class="terminal-2505080773-r4" x="73.2" y="239.6" textLength="73.2" clip-path="url(#terminal-2505080773-line-9)">--help</text>
+<text class="terminal-2505080773-r1" x="292.8" y="239.6" textLength="378.2" clip-path="url(#terminal-2505080773-line-9)">show this help message and exit</text>
+<text class="terminal-2505080773-r1" x="1952" y="239.6" textLength="12.2" clip-path="url(#terminal-2505080773-line-9)">
 </text>
-<text class="terminal-2188934924-r4" x="24.4" y="264" textLength="134.2" clip-path="url(#terminal-2188934924-line-10)">--directory</text>
-<text class="terminal-2188934924-r5" x="170.8" y="264" textLength="109.8" clip-path="url(#terminal-2188934924-line-10)">DIRECTORY</text>
-<text class="terminal-2188934924-r1" x="1952" y="264" textLength="12.2" clip-path="url(#terminal-2188934924-line-10)">
+<text class="terminal-2505080773-r4" x="24.4" y="264" textLength="134.2" clip-path="url(#terminal-2505080773-line-10)">--directory</text>
+<text class="terminal-2505080773-r5" x="170.8" y="264" textLength="109.8" clip-path="url(#terminal-2505080773-line-10)">DIRECTORY</text>
+<text class="terminal-2505080773-r1" x="1952" y="264" textLength="12.2" clip-path="url(#terminal-2505080773-line-10)">
 </text>
-<text class="terminal-2188934924-r1" x="292.8" y="288.4" textLength="231.8" clip-path="url(#terminal-2188934924-line-11)">Directory to audit.</text>
-<text class="terminal-2188934924-r1" x="1952" y="288.4" textLength="12.2" clip-path="url(#terminal-2188934924-line-11)">
+<text class="terminal-2505080773-r1" x="292.8" y="288.4" textLength="231.8" clip-path="url(#terminal-2505080773-line-11)">Directory to audit.</text>
+<text class="terminal-2505080773-r1" x="1952" y="288.4" textLength="12.2" clip-path="url(#terminal-2505080773-line-11)">
 </text>
-<text class="terminal-2188934924-r4" x="24.4" y="312.8" textLength="146.4" clip-path="url(#terminal-2188934924-line-12)">--audit-file</text>
-<text class="terminal-2188934924-r5" x="183" y="312.8" textLength="122" clip-path="url(#terminal-2188934924-line-12)">AUDIT_FILE</text>
-<text class="terminal-2188934924-r1" x="1952" y="312.8" textLength="12.2" clip-path="url(#terminal-2188934924-line-12)">
+<text class="terminal-2505080773-r4" x="24.4" y="312.8" textLength="146.4" clip-path="url(#terminal-2505080773-line-12)">--audit-file</text>
+<text class="terminal-2505080773-r5" x="183" y="312.8" textLength="122" clip-path="url(#terminal-2505080773-line-12)">AUDIT_FILE</text>
+<text class="terminal-2505080773-r1" x="1952" y="312.8" textLength="12.2" clip-path="url(#terminal-2505080773-line-12)">
 </text>
-<text class="terminal-2188934924-r1" x="292.8" y="337.2" textLength="768.6" clip-path="url(#terminal-2188934924-line-13)">File to read hashes from, used for auditing. Use &quot;-&quot; for stdin.</text>
-<text class="terminal-2188934924-r1" x="1952" y="337.2" textLength="12.2" clip-path="url(#terminal-2188934924-line-13)">
+<text class="terminal-2505080773-r1" x="292.8" y="337.2" textLength="768.6" clip-path="url(#terminal-2505080773-line-13)">File to read hashes from, used for auditing. Use &quot;-&quot; for stdin.</text>
+<text class="terminal-2505080773-r1" x="1952" y="337.2" textLength="12.2" clip-path="url(#terminal-2505080773-line-13)">
 </text>
-<text class="terminal-2188934924-r4" x="24.4" y="361.6" textLength="183" clip-path="url(#terminal-2188934924-line-14)">--output-format</text>
-<text class="terminal-2188934924-r5" x="219.6" y="361.6" textLength="768.6" clip-path="url(#terminal-2188934924-line-14)">{fraction,percent,json,json-compact,table,yaml,yaml-debug,none}</text>
-<text class="terminal-2188934924-r1" x="1952" y="361.6" textLength="12.2" clip-path="url(#terminal-2188934924-line-14)">
+<text class="terminal-2505080773-r4" x="24.4" y="361.6" textLength="183" clip-path="url(#terminal-2505080773-line-14)">--output-format</text>
+<text class="terminal-2505080773-r5" x="219.6" y="361.6" textLength="768.6" clip-path="url(#terminal-2505080773-line-14)">{fraction,percent,json,json-compact,table,yaml,yaml-debug,none}</text>
+<text class="terminal-2505080773-r1" x="1952" y="361.6" textLength="12.2" clip-path="url(#terminal-2505080773-line-14)">
 </text>
-<text class="terminal-2188934924-r1" x="292.8" y="386" textLength="1573.8" clip-path="url(#terminal-2188934924-line-15)">Output format to use. Output is written to stdout. Default is &quot;yaml&quot;. Choices are ('fraction', 'percent', 'json', 'json-compact',</text>
-<text class="terminal-2188934924-r1" x="1952" y="386" textLength="12.2" clip-path="url(#terminal-2188934924-line-15)">
+<text class="terminal-2505080773-r1" x="292.8" y="386" textLength="1573.8" clip-path="url(#terminal-2505080773-line-15)">Output format to use. Output is written to stdout. Default is &quot;yaml&quot;. Choices are ('fraction', 'percent', 'json', 'json-compact',</text>
+<text class="terminal-2505080773-r1" x="1952" y="386" textLength="12.2" clip-path="url(#terminal-2505080773-line-15)">
 </text>
-<text class="terminal-2188934924-r1" x="292.8" y="410.4" textLength="475.8" clip-path="url(#terminal-2188934924-line-16)">'table', 'yaml', 'yaml-debug', 'none').</text>
-<text class="terminal-2188934924-r1" x="1952" y="410.4" textLength="12.2" clip-path="url(#terminal-2188934924-line-16)">
+<text class="terminal-2505080773-r1" x="292.8" y="410.4" textLength="475.8" clip-path="url(#terminal-2505080773-line-16)">'table', 'yaml', 'yaml-debug', 'none').</text>
+<text class="terminal-2505080773-r1" x="1952" y="410.4" textLength="12.2" clip-path="url(#terminal-2505080773-line-16)">
 </text>
-<text class="terminal-2188934924-r4" x="24.4" y="434.8" textLength="183" clip-path="url(#terminal-2188934924-line-17)">--mismatch-exit</text>
-<text class="terminal-2188934924-r5" x="219.6" y="434.8" textLength="158.6" clip-path="url(#terminal-2188934924-line-17)">MISMATCH_EXIT</text>
-<text class="terminal-2188934924-r1" x="1952" y="434.8" textLength="12.2" clip-path="url(#terminal-2188934924-line-17)">
+<text class="terminal-2505080773-r4" x="24.4" y="434.8" textLength="183" clip-path="url(#terminal-2505080773-line-17)">--mismatch-exit</text>
+<text class="terminal-2505080773-r5" x="219.6" y="434.8" textLength="158.6" clip-path="url(#terminal-2505080773-line-17)">MISMATCH_EXIT</text>
+<text class="terminal-2505080773-r1" x="1952" y="434.8" textLength="12.2" clip-path="url(#terminal-2505080773-line-17)">
 </text>
-<text class="terminal-2188934924-r1" x="292.8" y="459.2" textLength="658.8" clip-path="url(#terminal-2188934924-line-18)">Exit code to use if a mismatch is found. Default is 1.</text>
-<text class="terminal-2188934924-r1" x="1952" y="459.2" textLength="12.2" clip-path="url(#terminal-2188934924-line-18)">
+<text class="terminal-2505080773-r1" x="292.8" y="459.2" textLength="658.8" clip-path="url(#terminal-2505080773-line-18)">Exit code to use if a mismatch is found. Default is 1.</text>
+<text class="terminal-2505080773-r1" x="1952" y="459.2" textLength="12.2" clip-path="url(#terminal-2505080773-line-18)">
 </text>
-<text class="terminal-2188934924-r4" x="24.4" y="483.6" textLength="122" clip-path="url(#terminal-2188934924-line-19)">--progress</text>
-<text class="terminal-2188934924-r5" x="158.6" y="483.6" textLength="768.6" clip-path="url(#terminal-2188934924-line-19)">{fraction,percent,json,json-compact,table,yaml,yaml-debug,none}</text>
-<text class="terminal-2188934924-r1" x="1952" y="483.6" textLength="12.2" clip-path="url(#terminal-2188934924-line-19)">
+<text class="terminal-2505080773-r4" x="24.4" y="483.6" textLength="122" clip-path="url(#terminal-2505080773-line-19)">--progress</text>
+<text class="terminal-2505080773-r5" x="158.6" y="483.6" textLength="768.6" clip-path="url(#terminal-2505080773-line-19)">{fraction,percent,json,json-compact,table,yaml,yaml-debug,none}</text>
+<text class="terminal-2505080773-r1" x="1952" y="483.6" textLength="12.2" clip-path="url(#terminal-2505080773-line-19)">
 </text>
-<text class="terminal-2188934924-r1" x="292.8" y="508" textLength="1622.6" clip-path="url(#terminal-2188934924-line-20)">Progress format to use. Default is &quot;yaml&quot;. Choices are ('fraction', 'percent', 'json', 'json-compact', 'table', 'yaml', 'yaml-debug',</text>
-<text class="terminal-2188934924-r1" x="1952" y="508" textLength="12.2" clip-path="url(#terminal-2188934924-line-20)">
+<text class="terminal-2505080773-r1" x="292.8" y="508" textLength="1622.6" clip-path="url(#terminal-2505080773-line-20)">Progress format to use. Default is &quot;yaml&quot;. Choices are ('fraction', 'percent', 'json', 'json-compact', 'table', 'yaml', 'yaml-debug',</text>
+<text class="terminal-2505080773-r1" x="1952" y="508" textLength="12.2" clip-path="url(#terminal-2505080773-line-20)">
 </text>
-<text class="terminal-2188934924-r1" x="292.8" y="532.4" textLength="97.6" clip-path="url(#terminal-2188934924-line-21)">'none').</text>
-<text class="terminal-2188934924-r1" x="1952" y="532.4" textLength="12.2" clip-path="url(#terminal-2188934924-line-21)">
+<text class="terminal-2505080773-r1" x="292.8" y="532.4" textLength="97.6" clip-path="url(#terminal-2505080773-line-21)">'none').</text>
+<text class="terminal-2505080773-r1" x="1952" y="532.4" textLength="12.2" clip-path="url(#terminal-2505080773-line-21)">
 </text>
-<text class="terminal-2188934924-r4" x="24.4" y="556.8" textLength="146.4" clip-path="url(#terminal-2188934924-line-22)">--group-size</text>
-<text class="terminal-2188934924-r5" x="183" y="556.8" textLength="122" clip-path="url(#terminal-2188934924-line-22)">GROUP_SIZE</text>
-<text class="terminal-2188934924-r1" x="1952" y="556.8" textLength="12.2" clip-path="url(#terminal-2188934924-line-22)">
+<text class="terminal-2505080773-r4" x="24.4" y="556.8" textLength="146.4" clip-path="url(#terminal-2505080773-line-22)">--group-size</text>
+<text class="terminal-2505080773-r5" x="183" y="556.8" textLength="122" clip-path="url(#terminal-2505080773-line-22)">GROUP_SIZE</text>
+<text class="terminal-2505080773-r1" x="1952" y="556.8" textLength="12.2" clip-path="url(#terminal-2505080773-line-22)">
 </text>
-<text class="terminal-2188934924-r1" x="292.8" y="581.2" textLength="866.2" clip-path="url(#terminal-2188934924-line-23)">Number of chunks to run on a single thread, in sequence. Default is 10.</text>
-<text class="terminal-2188934924-r1" x="1952" y="581.2" textLength="12.2" clip-path="url(#terminal-2188934924-line-23)">
+<text class="terminal-2505080773-r1" x="292.8" y="581.2" textLength="866.2" clip-path="url(#terminal-2505080773-line-23)">Number of chunks to run on a single thread, in sequence. Default is 10.</text>
+<text class="terminal-2505080773-r1" x="1952" y="581.2" textLength="12.2" clip-path="url(#terminal-2505080773-line-23)">
 </text>
-<text class="terminal-2188934924-r4" x="24.4" y="605.6" textLength="158.6" clip-path="url(#terminal-2188934924-line-24)">--max-workers</text>
-<text class="terminal-2188934924-r5" x="195.2" y="605.6" textLength="134.2" clip-path="url(#terminal-2188934924-line-24)">MAX_WORKERS</text>
-<text class="terminal-2188934924-r1" x="1952" y="605.6" textLength="12.2" clip-path="url(#terminal-2188934924-line-24)">
+<text class="terminal-2505080773-r4" x="24.4" y="605.6" textLength="158.6" clip-path="url(#terminal-2505080773-line-24)">--max-workers</text>
+<text class="terminal-2505080773-r5" x="195.2" y="605.6" textLength="134.2" clip-path="url(#terminal-2505080773-line-24)">MAX_WORKERS</text>
+<text class="terminal-2505080773-r1" x="1952" y="605.6" textLength="12.2" clip-path="url(#terminal-2505080773-line-24)">
 </text>
-<text class="terminal-2188934924-r1" x="292.8" y="630" textLength="1183.4" clip-path="url(#terminal-2188934924-line-25)">Maximum number of workers to use for hashing. To use the number of CPUs, set to 0. Default is 10.</text>
-<text class="terminal-2188934924-r1" x="1952" y="630" textLength="12.2" clip-path="url(#terminal-2188934924-line-25)">
+<text class="terminal-2505080773-r1" x="292.8" y="630" textLength="1171.2" clip-path="url(#terminal-2505080773-line-25)">Maximum number of workers to use for hashing. To use the number of CPUs, set to 0. Default is 0.</text>
+<text class="terminal-2505080773-r1" x="1952" y="630" textLength="12.2" clip-path="url(#terminal-2505080773-line-25)">
 </text>
-<text class="terminal-2188934924-r4" x="24.4" y="654.4" textLength="195.2" clip-path="url(#terminal-2188934924-line-26)">--hash-shell-str</text>
-<text class="terminal-2188934924-r5" x="231.8" y="654.4" textLength="170.8" clip-path="url(#terminal-2188934924-line-26)">HASH_SHELL_STR</text>
-<text class="terminal-2188934924-r1" x="1952" y="654.4" textLength="12.2" clip-path="url(#terminal-2188934924-line-26)">
+<text class="terminal-2505080773-r4" x="24.4" y="654.4" textLength="195.2" clip-path="url(#terminal-2505080773-line-26)">--hash-shell-str</text>
+<text class="terminal-2505080773-r5" x="231.8" y="654.4" textLength="170.8" clip-path="url(#terminal-2505080773-line-26)">HASH_SHELL_STR</text>
+<text class="terminal-2505080773-r1" x="1952" y="654.4" textLength="12.2" clip-path="url(#terminal-2505080773-line-26)">
 </text>
-<text class="terminal-2188934924-r1" x="292.8" y="678.8" textLength="732" clip-path="url(#terminal-2188934924-line-27)">Shell string/command to hash files with. Default is &quot;xxhsum </text>
-<text class="terminal-2188934924-r4" x="1024.8" y="678.8" textLength="36.6" clip-path="url(#terminal-2188934924-line-27)">-H0</text>
-<text class="terminal-2188934924-r1" x="1061.4" y="678.8" textLength="12.2" clip-path="url(#terminal-2188934924-line-27)">&quot;</text>
-<text class="terminal-2188934924-r1" x="1952" y="678.8" textLength="12.2" clip-path="url(#terminal-2188934924-line-27)">
+<text class="terminal-2505080773-r1" x="292.8" y="678.8" textLength="732" clip-path="url(#terminal-2505080773-line-27)">Shell string/command to hash files with. Default is &quot;xxhsum </text>
+<text class="terminal-2505080773-r4" x="1024.8" y="678.8" textLength="36.6" clip-path="url(#terminal-2505080773-line-27)">-H0</text>
+<text class="terminal-2505080773-r1" x="1061.4" y="678.8" textLength="12.2" clip-path="url(#terminal-2505080773-line-27)">&quot;</text>
+<text class="terminal-2505080773-r1" x="1952" y="678.8" textLength="12.2" clip-path="url(#terminal-2505080773-line-27)">
 </text>
-<text class="terminal-2188934924-r4" x="24.4" y="703.2" textLength="97.6" clip-path="url(#terminal-2188934924-line-28)">--dd-cmd</text>
-<text class="terminal-2188934924-r5" x="134.2" y="703.2" textLength="73.2" clip-path="url(#terminal-2188934924-line-28)">DD_CMD</text>
-<text class="terminal-2188934924-r1" x="292.8" y="703.2" textLength="536.8" clip-path="url(#terminal-2188934924-line-28)">Command to copy files with. Default is &quot;dd&quot;.</text>
-<text class="terminal-2188934924-r1" x="1952" y="703.2" textLength="12.2" clip-path="url(#terminal-2188934924-line-28)">
+<text class="terminal-2505080773-r4" x="24.4" y="703.2" textLength="97.6" clip-path="url(#terminal-2505080773-line-28)">--dd-cmd</text>
+<text class="terminal-2505080773-r5" x="134.2" y="703.2" textLength="73.2" clip-path="url(#terminal-2505080773-line-28)">DD_CMD</text>
+<text class="terminal-2505080773-r1" x="292.8" y="703.2" textLength="561.2" clip-path="url(#terminal-2505080773-line-28)">Command to split chunks with. Default is &quot;dd&quot;.</text>
+<text class="terminal-2505080773-r1" x="1952" y="703.2" textLength="12.2" clip-path="url(#terminal-2505080773-line-28)">
 </text>
 </g>
 </g>
