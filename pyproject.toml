@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "rsynccheck"
-version = "0.0.1"
+version = "0.1.0"
 description = "Check the completeness of an rsync operation."
 authors = [{name = "AYF", email = "realazthat@gmail.com"}]
 license = {file = "LICENSE.md"}
@@ -177,8 +177,8 @@ Documentation = "https://github.com/realazthat/rsynccheck"
 Repository = "https://github.com/realazthat/rsynccheck"
 
 [tool.rsynccheck-project-metadata]
-last_release = "0.0.1"
-last_stable_release = "0.0.1"
+last_release = "0.1.0"
+last_stable_release = "0.1.0"
 
 [tool.setuptools]
 packages = ["rsynccheck", "rsynccheck.utilities"]

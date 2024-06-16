@@ -72,7 +72,7 @@ SOURCE: `README.md.jinja2`.
 
 </div>
 
-<img alt="Demo" src="https://raw.githubusercontent.com/realazthat/rsynccheck/v0.0.1/.github/demo.gif" width="100%"/>
+<img alt="Demo" src="https://raw.githubusercontent.com/realazthat/rsynccheck/v0.1.0/.github/demo.gif" width="100%"/>
 
 ## ❔ What
 
@@ -91,7 +91,7 @@ files.
 pip install rsynccheck
 
 # Install from git (https://github.com/realazthat/rsynccheck)
-pip install git+https://github.com/realazthat/rsynccheck.git@v0.0.1
+pip install git+https://github.com/realazthat/rsynccheck.git@v0.1.0
 ```
 
 ## 🚜 Usage
@@ -125,21 +125,21 @@ python -m rsynccheck.cli \
 Screenshot in terminal:
 
 <!---->
-<img alt="Output of `./snipinator/examples/example_example.sh`" src="https://raw.githubusercontent.com/realazthat/rsynccheck/v0.0.1/README.example.generated.svg"/>
+<img alt="Output of `./snipinator/examples/example_example.sh`" src="https://raw.githubusercontent.com/realazthat/rsynccheck/v0.1.0/README.example.generated.svg"/>
 <!-- -->
 
 ## 💻 Command Line Options
 
 <!---->
-<img alt="Output of `python -m rsynccheck.cli --help`" src="https://raw.githubusercontent.com/realazthat/rsynccheck/v0.0.1/README.help.generated.svg"/>
+<img alt="Output of `python -m rsynccheck.cli --help`" src="https://raw.githubusercontent.com/realazthat/rsynccheck/v0.1.0/README.help.generated.svg"/>
 <!-- -->
 
 <!---->
-<img alt="Output of `python -m rsynccheck.cli hash --help`" src="https://raw.githubusercontent.com/realazthat/rsynccheck/v0.0.1/README.hash.help.generated.svg"/>
+<img alt="Output of `python -m rsynccheck.cli hash --help`" src="https://raw.githubusercontent.com/realazthat/rsynccheck/v0.1.0/README.hash.help.generated.svg"/>
 <!-- -->
 
 <!---->
-<img alt="Output of `python -m rsynccheck.cli audit --help`" src="https://raw.githubusercontent.com/realazthat/rsynccheck/v0.0.1/README.audit.help.generated.svg"/>
+<img alt="Output of `python -m rsynccheck.cli audit --help`" src="https://raw.githubusercontent.com/realazthat/rsynccheck/v0.1.0/README.audit.help.generated.svg"/>
 <!-- -->
 
 ## ✅ Requirements
@@ -153,7 +153,7 @@ Screenshot in terminal:
 
 - WSL2 Ubuntu 20.04, Python `3.8.0`.
 - Ubuntu 20.04, Python `3.8.0, 3.9.0, 3.10.0, 3.11.0, 3.12.0`, tested in GitHub Actions
-  workflow ([build-and-test.yml](https://github.com/realazthat/rsynccheck/blob/v0.0.1/.github/workflows/build-and-test.yml)).
+  workflow ([build-and-test.yml](https://github.com/realazthat/rsynccheck/blob/v0.1.0/.github/workflows/build-and-test.yml)).
 
 ## 🐳 Docker Image
 
@@ -171,7 +171,7 @@ isn't available inside the container. xxhash is installed in the image.**
 # /data in the docker image is the working directory, so paths are simpler.
 docker run --rm --tty \
   -v "${PWD}:/data" \
-  ghcr.io/realazthat/rsynccheck:v0.0.1 \
+  ghcr.io/realazthat/rsynccheck:v0.1.0 \
   hash \
   --ignorefile ".gitignore" \
   --ignoreline .trunk --ignoreline .git \
@@ -183,7 +183,7 @@ docker run --rm --tty \
 # Check the audit.yaml file on the other machine.
 docker run --rm --tty \
   -v "${PWD}:/data" \
-  ghcr.io/realazthat/rsynccheck:v0.0.1 \
+  ghcr.io/realazthat/rsynccheck:v0.1.0 \
   audit \
   --audit-file ".deleteme/check-changes-audit.yaml" \
   --progress none \
@@ -235,7 +235,7 @@ repository.
 ## 🔑 License
 
 This project is licensed under the MIT License - see the
-[./LICENSE.md](https://github.com/realazthat/rsynccheck/blob/v0.0.1/LICENSE.md) file for details.
+[./LICENSE.md](https://github.com/realazthat/rsynccheck/blob/v0.1.0/LICENSE.md) file for details.
 
 ## 🙏 Thanks
 
@@ -262,7 +262,7 @@ Not complete, and not necessarily up to date. Make a PR
 
 - For running `pre.sh` (Linux-like environment).
 
-  - From [./.github/dependencies.yml](https://github.com/realazthat/rsynccheck/blob/v0.0.1/.github/dependencies.yml), which is used for
+  - From [./.github/dependencies.yml](https://github.com/realazthat/rsynccheck/blob/v0.1.0/.github/dependencies.yml), which is used for
     the GH Action to do a fresh install of everything:
 
     ```yaml
@@ -293,7 +293,7 @@ Not complete, and not necessarily up to date. Make a PR
     ```
 
   - Requires `pyenv`, or an exact matching version of python as in
-    [./.python-version](https://github.com/realazthat/rsynccheck/blob/v0.0.1/.python-version) (which is currently
+    [./.python-version](https://github.com/realazthat/rsynccheck/blob/v0.1.0/.python-version) (which is currently
     `3.8.0`).
   - act (to run the GH Action locally):
     - Requires nodejs.
@@ -309,7 +309,7 @@ Not complete, and not necessarily up to date. Make a PR
 2. Stage your files: `git add path/to/file.py`.
 3. `bash ./scripts/pre.sh`, this will format, lint, and test the code.
 4. `git status` check if anything changed (generated
-   [./README.md](https://github.com/realazthat/rsynccheck/blob/v0.0.1/README.md) for example), if so, `git add` the
+   [./README.md](https://github.com/realazthat/rsynccheck/blob/v0.1.0/README.md) for example), if so, `git add` the
    changes, and go back to the previous step.
 5. `git commit -m "..."`.
 6. Make a PR to `develop` (or push to develop if you have the rights).
@@ -321,7 +321,7 @@ These instructions are for maintainers of the project.
 1. In the `develop` branch, run `bash ./scripts/pre.sh` to ensure
    everything is in order.
 2. In the `develop` branch, bump the version in
-   [./pyproject.toml](https://github.com/realazthat/rsynccheck/blob/v0.0.1/pyproject.toml), following semantic versioning
+   [./pyproject.toml](https://github.com/realazthat/rsynccheck/blob/v0.1.0/pyproject.toml), following semantic versioning
    principles. Also modify the `last_release` and `last_stable_release` in the
    `[tool.rsynccheck-project-metadata]` table as appropriate. Run
    `bash ./scripts/pre.sh` to ensure everything is in order.
@@ -341,29 +341,29 @@ These instructions are for maintainers of the project.
    `git checkout develop && git merge master`.
 9. Push the develop branch to GitHub: `git push origin develop`.
 
-[1]: https://raw.githubusercontent.com/realazthat/rsynccheck/v0.0.1/.github/logo-exported.svg
+[1]: https://raw.githubusercontent.com/realazthat/rsynccheck/v0.1.0/.github/logo-exported.svg
 [2]: https://github.com/realazthat/rsynccheck
 [3]: https://img.shields.io/badge/Audience-Developers-0A1E1E?style=plastic&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXVzZXJzIj48cGF0aCBkPSJNMTYgMjF2LTJhNCA0IDAgMCAwLTQtNEg2YTQgNCAwIDAgMC00IDR2MiIvPjxjaXJjbGUgY3g9IjkiIGN5PSI3IiByPSI0Ii8+PHBhdGggZD0iTTIyIDIxdi0yYTQgNCAwIDAgMC0zLTMuODciLz48cGF0aCBkPSJNMTYgMy4xM2E0IDQgMCAwIDEgMCA3Ljc1Ii8+PC9zdmc+
 [4]: https://img.shields.io/badge/Platform-Linux-0A1E1E?style=plastic&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWxhcHRvcC1taW5pbWFsIj48cmVjdCB3aWR0aD0iMTgiIGhlaWdodD0iMTIiIHg9IjMiIHk9IjQiIHJ4PSIyIiByeT0iMiIvPjxsaW5lIHgxPSIyIiB4Mj0iMjIiIHkxPSIyMCIgeTI9IjIwIi8+PC9zdmc+
 [5]: https://img.shields.io/github/languages/top/realazthat/rsynccheck.svg?cacheSeconds=28800&style=plastic&color=0A1E1E
 [6]: https://img.shields.io/github/license/realazthat/rsynccheck?style=plastic&color=0A1E1E
-[7]: https://github.com/realazthat/rsynccheck/blob/v0.0.1/LICENSE.md
+[7]: https://github.com/realazthat/rsynccheck/blob/v0.1.0/LICENSE.md
 [8]: https://img.shields.io/pypi/v/rsynccheck?style=plastic&color=0A1E1E
 [9]: https://pypi.org/project/rsynccheck/
 [10]: https://img.shields.io/pypi/pyversions/rsynccheck?style=plastic&color=0A1E1E
 [11]: https://github.com/realazthat/rsynccheck/tree/master
 [12]: https://img.shields.io/github/actions/workflow/status/realazthat/rsynccheck/build-and-test.yml?branch=master&style=plastic
 [13]: https://github.com/realazthat/rsynccheck/actions/workflows/build-and-test.yml
-[14]: https://img.shields.io/github/commits-since/realazthat/rsynccheck/v0.0.1/master?style=plastic
-[15]: https://github.com/realazthat/rsynccheck/compare/v0.0.1...master
+[14]: https://img.shields.io/github/commits-since/realazthat/rsynccheck/v0.1.0/master?style=plastic
+[15]: https://github.com/realazthat/rsynccheck/compare/v0.1.0...master
 [16]: https://img.shields.io/github/last-commit/realazthat/rsynccheck/master?style=plastic
 [17]: https://github.com/realazthat/rsynccheck/commits/master
 [18]: https://github.com/realazthat/rsynccheck/tree/develop
 [19]: https://img.shields.io/github/actions/workflow/status/realazthat/rsynccheck/build-and-test.yml?branch=develop&style=plastic
-[20]: https://img.shields.io/github/commits-since/realazthat/rsynccheck/v0.0.1/develop?style=plastic
-[21]: https://github.com/realazthat/rsynccheck/compare/v0.0.1...develop
-[22]: https://img.shields.io/github/commits-since/realazthat/rsynccheck/v0.0.1/develop?style=plastic
-[23]: https://github.com/realazthat/rsynccheck/compare/v0.0.1...develop
+[20]: https://img.shields.io/github/commits-since/realazthat/rsynccheck/v0.1.0/develop?style=plastic
+[21]: https://github.com/realazthat/rsynccheck/compare/v0.1.0...develop
+[22]: https://img.shields.io/github/commits-since/realazthat/rsynccheck/v0.1.0/develop?style=plastic
+[23]: https://github.com/realazthat/rsynccheck/compare/v0.1.0...develop
 [24]: https://img.shields.io/github/last-commit/realazthat/rsynccheck/develop?style=plastic
 [25]: https://github.com/realazthat/rsynccheck/commits/develop
 [26]: https://ghcr.io/realazthat/rsynccheck

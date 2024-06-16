@@ -91,7 +91,7 @@ files.
 pip install rsynccheck
 
 # Install from git (https://github.com/realazthat/rsynccheck)
-pip install git+https://github.com/realazthat/rsynccheck.git@v0.0.1
+pip install git+https://github.com/realazthat/rsynccheck.git@v0.1.0
 ```
 
 ## 🚜 Usage
@@ -171,7 +171,7 @@ isn't available inside the container. xxhash is installed in the image.**
 # /data in the docker image is the working directory, so paths are simpler.
 docker run --rm --tty \
   -v "${PWD}:/data" \
-  ghcr.io/realazthat/rsynccheck:v0.0.1 \
+  ghcr.io/realazthat/rsynccheck:v0.1.0 \
   hash \
   --ignorefile ".gitignore" \
   --ignoreline .trunk --ignoreline .git \
@@ -183,7 +183,7 @@ docker run --rm --tty \
 # Check the audit.yaml file on the other machine.
 docker run --rm --tty \
   -v "${PWD}:/data" \
-  ghcr.io/realazthat/rsynccheck:v0.0.1 \
+  ghcr.io/realazthat/rsynccheck:v0.1.0 \
   audit \
   --audit-file ".deleteme/check-changes-audit.yaml" \
   --progress none \
@@ -363,9 +363,9 @@ These instructions are for maintainers of the project.
 [13]:
   https://github.com/realazthat/rsynccheck/actions/workflows/build-and-test.yml
 [14]:
-  https://img.shields.io/github/commits-since/realazthat/rsynccheck/v0.0.1/master?style=plastic
+  https://img.shields.io/github/commits-since/realazthat/rsynccheck/v0.1.0/master?style=plastic
 [15]:
-  https://github.com/realazthat/rsynccheck/compare/v0.0.1...master
+  https://github.com/realazthat/rsynccheck/compare/v0.1.0...master
 [16]:
   https://img.shields.io/github/last-commit/realazthat/rsynccheck/master?style=plastic
 [17]: https://github.com/realazthat/rsynccheck/commits/master
@@ -373,13 +373,13 @@ These instructions are for maintainers of the project.
 [19]:
   https://img.shields.io/github/actions/workflow/status/realazthat/rsynccheck/build-and-test.yml?branch=develop&style=plastic
 [20]:
-  https://img.shields.io/github/commits-since/realazthat/rsynccheck/v0.0.1/develop?style=plastic
+  https://img.shields.io/github/commits-since/realazthat/rsynccheck/v0.1.0/develop?style=plastic
 [21]:
-  https://github.com/realazthat/rsynccheck/compare/v0.0.1...develop
+  https://github.com/realazthat/rsynccheck/compare/v0.1.0...develop
 [22]:
-  https://img.shields.io/github/commits-since/realazthat/rsynccheck/v0.0.1/develop?style=plastic
+  https://img.shields.io/github/commits-since/realazthat/rsynccheck/v0.1.0/develop?style=plastic
 [23]:
-  https://github.com/realazthat/rsynccheck/compare/v0.0.1...develop
+  https://github.com/realazthat/rsynccheck/compare/v0.1.0...develop
 [24]:
   https://img.shields.io/github/last-commit/realazthat/rsynccheck/develop?style=plastic
 [25]: https://github.com/realazthat/rsynccheck/commits/develop
